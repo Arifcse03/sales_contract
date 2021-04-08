@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ImpSaleContrLinesVO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.view.ImpSaleContrLinesVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="StateLOV1"
+    ViewObjectName="model.lov.StateLOV"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_State"
+    ListVOName="StateLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="State"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="State"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="State"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[SELECT ImpSaleContrLinesEO.IMP_SALE_LINE_ID, 
+       ImpSaleContrLinesEO.IMP_SALE_HEADER_ID, 
+       ImpSaleContrLinesEO.STYLE_NO, 
+       ImpSaleContrLinesEO.BPO_NO, 
+       ImpSaleContrLinesEO.ITEM_DESCRIPTION, 
+       ImpSaleContrLinesEO.QUANTITY, 
+       ImpSaleContrLinesEO.UNIT_PRICE, 
+       ImpSaleContrLinesEO.TOTAL_VALUE, 
+       ImpSaleContrLinesEO.SHIP_EX_FACTORY_DATE, 
+       ImpSaleContrLinesEO.SHIP_CANCEL_EX_BD_DATE, 
+       ImpSaleContrLinesEO.SALES_TERM, 
+       ImpSaleContrLinesEO.STATUS, 
+       ImpSaleContrLinesEO.LAST_UPDATE_LOGIN, 
+       ImpSaleContrLinesEO.LAST_UPDATE_DATE, 
+       ImpSaleContrLinesEO.LAST_UPDATED_BY, 
+       ImpSaleContrLinesEO.CREATION_DATE, 
+       ImpSaleContrLinesEO.CREATED_BY, 
+       ImpSaleContrLinesEO.ATTRIBUTE1, 
+       ImpSaleContrLinesEO.ATTRIBUTE2, 
+       ImpSaleContrLinesEO.LAST_PRICE, 
+       ImpSaleContrLinesEO.LAST_TOTAL_PRICE, 
+       ImpSaleContrLinesEO.LAST_QTY,
+       ImpSaleContrLinesEO.BPO_ID,
+       ImpSaleContrLinesEO.OLD_BPO,
+(
+SELECT SUM (UNIT_SELLING_PRICE) / COUNT (UNIT_SELLING_PRICE) PRICE
+FROM (SELECT OLA.UNIT_SELLING_PRICE,OLA.LINE_ID
+FROM OE_ORDER_HEADERS_ALL OHA, OE_ORDER_LINES_ALL OLA
+WHERE OHA.HEADER_ID = OLA.HEADER_ID) QUE
+WHERE LINE_ID = TO_NUMBER(ImpSaleContrLinesEO.ATTRIBUTE1)
+GROUP BY LINE_ID
+) ORIGINAL_PRICE,
+(
+SELECT SUM (ORDERED_QUANTITY) QUANTITY
+FROM (SELECT OLA.ORDERED_QUANTITY, OLA.LINE_ID
+FROM OE_ORDER_HEADERS_ALL OHA, OE_ORDER_LINES_ALL OLA
+WHERE OHA.HEADER_ID = OLA.HEADER_ID) QUE
+WHERE LINE_ID = TO_NUMBER(ImpSaleContrLinesEO.ATTRIBUTE1)
+GROUP BY LINE_ID
+) ORIGINAL_QUANTITY,
+(
+SELECT SUM (TOTAL_VALUE) TOTAL_VALUE
+FROM (SELECT (OLA.ORDERED_QUANTITY * OLA.UNIT_SELLING_PRICE
+) TOTAL_VALUE, OLA.LINE_ID
+FROM OE_ORDER_HEADERS_ALL OHA, OE_ORDER_LINES_ALL OLA
+WHERE OHA.HEADER_ID = OLA.HEADER_ID) QUE
+WHERE LINE_ID = TO_NUMBER(ImpSaleContrLinesEO.ATTRIBUTE1)
+GROUP BY LINE_ID
+) ORIGINAL_TOTAL_VALUE,
+(
+SELECT BPO_NUMBER
+FROM (SELECT OHA.CUST_PO_NUMBER BPO_NUMBER, OLA.LINE_ID
+FROM OE_ORDER_HEADERS_ALL OHA, OE_ORDER_LINES_ALL OLA
+WHERE OHA.HEADER_ID = OLA.HEADER_ID) QUE
+WHERE LINE_ID = TO_NUMBER(ImpSaleContrLinesEO.ATTRIBUTE1)
+) ORIGINAL_BPO
+FROM XX_COM_SALES_CONTRACT_L_T ImpSaleContrLinesEO]]>
+  </SQLQuery>
+  <EntityUsage
+    Name="ImpSaleContrLinesEO"
+    Entity="model.entity.ImpSaleContrLinesEO"/>
+  <ViewAttribute
+    Name="ImpSaleLineId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ImpSaleLineId"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="IMP_SALE_LINE_ID"/>
+  <ViewAttribute
+    Name="ImpSaleHeaderId"
+    PrecisionRule="true"
+    EntityAttrName="ImpSaleHeaderId"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="IMP_SALE_HEADER_ID"/>
+  <ViewAttribute
+    Name="StyleNo"
+    PrecisionRule="true"
+    EntityAttrName="StyleNo"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="STYLE_NO"/>
+  <ViewAttribute
+    Name="BpoNo"
+    PrecisionRule="true"
+    EntityAttrName="BpoNo"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="BPO_NO"/>
+  <ViewAttribute
+    Name="ItemDescription"
+    PrecisionRule="true"
+    EntityAttrName="ItemDescription"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="ITEM_DESCRIPTION"/>
+  <ViewAttribute
+    Name="Quantity"
+    PrecisionRule="true"
+    EntityAttrName="Quantity"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="QUANTITY"/>
+  <ViewAttribute
+    Name="UnitPrice"
+    PrecisionRule="true"
+    EntityAttrName="UnitPrice"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="UNIT_PRICE"/>
+  <ViewAttribute
+    Name="TotalValue"
+    PrecisionRule="true"
+    EntityAttrName="TotalValue"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="TOTAL_VALUE"/>
+  <ViewAttribute
+    Name="ShipExFactoryDate"
+    PrecisionRule="true"
+    EntityAttrName="ShipExFactoryDate"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="SHIP_EX_FACTORY_DATE"/>
+  <ViewAttribute
+    Name="ShipCancelExBdDate"
+    PrecisionRule="true"
+    EntityAttrName="ShipCancelExBdDate"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="SHIP_CANCEL_EX_BD_DATE"/>
+  <ViewAttribute
+    Name="SalesTerm"
+    PrecisionRule="true"
+    EntityAttrName="SalesTerm"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="SALES_TERM"/>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="STATUS"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="LAST_UPDATE_LOGIN"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="Attribute1"
+    PrecisionRule="true"
+    EntityAttrName="Attribute1"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="ATTRIBUTE1"/>
+  <ViewAttribute
+    Name="Attribute2"
+    PrecisionRule="true"
+    EntityAttrName="Attribute2"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="ATTRIBUTE2"/>
+  <ViewAttribute
+    Name="LastPrice"
+    PrecisionRule="true"
+    EntityAttrName="LastPrice"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="LAST_PRICE"/>
+  <ViewAttribute
+    Name="LastTotalPrice"
+    PrecisionRule="true"
+    EntityAttrName="LastTotalPrice"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="LAST_TOTAL_PRICE"/>
+  <ViewAttribute
+    Name="LastQty"
+    PrecisionRule="true"
+    EntityAttrName="LastQty"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="LAST_QTY"/>
+  <ViewAttribute
+    Name="BpoId"
+    PrecisionRule="true"
+    EntityAttrName="BpoId"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="BPO_ID"/>
+  <ViewAttribute
+    Name="OldBpo"
+    PrecisionRule="true"
+    EntityAttrName="OldBpo"
+    EntityUsage="ImpSaleContrLinesEO"
+    AliasName="OLD_BPO"/>
+  <ViewAttribute
+    Name="OriginalPrice"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ORIGINAL_PRICE"
+    Expression="ORIGINAL_PRICE"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OriginalQuantity"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ORIGINAL_QUANTITY"
+    Expression="ORIGINAL_QUANTITY"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OriginalTotalValue"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ORIGINAL_TOTAL_VALUE"
+    Expression="ORIGINAL_TOTAL_VALUE"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OriginalBpo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORIGINAL_BPO"
+    Expression="ORIGINAL_BPO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="State"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_State">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

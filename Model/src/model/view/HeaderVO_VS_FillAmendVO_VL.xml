@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="HeaderVO_VS_FillAmendVO_VL"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.view.HeaderVO_VS_FillAmendVO_VL_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="ImpSaleContrHeaderVO"
+    Cardinality="1"
+    Owner="model.view.ImpSaleContrHeaderVO"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_accessor" Value="true"/>
+      <Attr Name="_finderName" Value="ImpSaleContrHeaderVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.view.ImpSaleContrHeaderVO.BuyerId"/>
+      <Item Value="model.view.ImpSaleContrHeaderVO.ImpSaleHeaderId"/>
+      <Item Value="model.view.ImpSaleContrHeaderVO.Season"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="FillAmendVO"
+    Cardinality="-1"
+    Owner="model.view.FillAmendVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="FillAmendVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.view.FillAmendVO.BuyerId"/>
+      <Item Value="model.view.FillAmendVO.ImpSaleHeaderId"/>
+      <Item Value="model.view.FillAmendVO.Season"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

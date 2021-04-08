@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelGroupLayout id="pgl1" layout="vertical">
+          <af:panelGroupLayout layout="vertical" id="pgl2">
+            <af:panelHeader text="ImpSaleContrHeaderEO" id="ph2">
+              <af:query id="qryId1" headerText="Search" disclosed="true"
+                        value="#{bindings.ImpSaleContrHeaderVOCriteriaQuery.queryDescriptor}"
+                        model="#{bindings.ImpSaleContrHeaderVOCriteriaQuery.queryModel}"
+                        queryListener="#{bindings.ImpSaleContrHeaderVOCriteriaQuery.processQuery}"
+                        queryOperationListener="#{bindings.ImpSaleContrHeaderVOCriteriaQuery.processQueryOperation}"
+                        resultComponentId="::pc1:t1"/>
+            </af:panelHeader>
+          </af:panelGroupLayout>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar">
+              <af:toolbar id="t2">
+                <af:commandButton actionListener="#{bindings.CreateInsert.execute}"
+                                  text="Create"
+                                  disabled="#{!bindings.CreateInsert.enabled}"
+                                  id="cb1" action="Go to Create"/>
+                <af:commandButton actionListener="#{bindings.Delete.execute}"
+                                  text="Delete"
+                                  disabled="#{!bindings.Delete.enabled}"
+                                  id="cb2"/>
+                <af:commandButton text="Edit" id="cb3"
+                                  disabled="#{!bindings.setCurrentRowWithKey.enabled}"
+                                  actionListener="#{bindings.setCurrentRowWithKey.execute}"
+                                  action="Go to Create"/>
+                <af:commandButton actionListener="#{bindings.Commit.execute}"
+                                  text="Save"
+                                  disabled="#{!bindings.Commit.enabled}"
+                                  id="cb4"/>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar"/>
+            <af:table value="#{bindings.ImpSaleContrHeaderVO1.collectionModel}"
+                      var="row"
+                      rows="#{bindings.ImpSaleContrHeaderVO1.rangeSize}"
+                      emptyText="#{bindings.ImpSaleContrHeaderVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.ImpSaleContrHeaderVO1.rangeSize}"
+                      rowBandingInterval="1"
+                      filterModel="#{bindings.ImpSaleContrHeaderVOCriteriaQuery.queryDescriptor}"
+                      queryListener="#{bindings.ImpSaleContrHeaderVOCriteriaQuery.processQuery}"
+                      filterVisible="true" varStatus="vs"
+                      selectedRowKeys="#{bindings.ImpSaleContrHeaderVO1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.ImpSaleContrHeaderVO1.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t1"
+                      partialTriggers="::cb1 ::cb2 ::cb3 ::cb4"
+                      width="100%">
+              <af:column sortProperty="SaleContractDocNo" filterable="true"
+                         sortable="true"
+                         headerText="Document Number"
+                         id="c20" width="80" align="center">
+                <af:inputText value="#{row.bindings.SaleContractDocNo.inputValue}"
+                              label="#{bindings.ImpSaleContrHeaderVO1.hints.SaleContractDocNo.label}"
+                              required="#{bindings.ImpSaleContrHeaderVO1.hints.SaleContractDocNo.mandatory}"
+                              columns="#{bindings.ImpSaleContrHeaderVO1.hints.SaleContractDocNo.displayWidth}"
+                              maximumLength="#{bindings.ImpSaleContrHeaderVO1.hints.SaleContractDocNo.precision}"
+                              shortDesc="#{bindings.ImpSaleContrHeaderVO1.hints.SaleContractDocNo.tooltip}"
+                              id="it3" readOnly="true">
+                  <f:validator binding="#{row.bindings.SaleContractDocNo.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.ImpSaleContrHeaderVO1.hints.SaleContractDocNo.format}"/>
+                </af:inputText>
+                <af:spacer width="10" height="10" id="s1"/>
+              </af:column>
+              <af:column headerText="Amendment Date"
+                         id="c2" align="center" sortable="true"
+                         filterable="true" width="80">
+                <af:outputText value="#{row.VersionDate}" id="ot3">
+                  <af:convertDateTime pattern="#{bindings.ImpSaleContrHeaderVO1.hints.VersionDate.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="ImpSaleContractNo" filterable="true"
+                         sortable="true"
+                         headerText="Contact No"
+                         id="c15" width="90" align="center">
+                <af:inputText value="#{row.bindings.ImpSaleContractNo.inputValue}"
+                              label="#{bindings.ImpSaleContrHeaderVO1.hints.ImpSaleContractNo.label}"
+                              required="#{bindings.ImpSaleContrHeaderVO1.hints.ImpSaleContractNo.mandatory}"
+                              columns="#{bindings.ImpSaleContrHeaderVO1.hints.ImpSaleContractNo.displayWidth}"
+                              maximumLength="#{bindings.ImpSaleContrHeaderVO1.hints.ImpSaleContractNo.precision}"
+                              shortDesc="#{bindings.ImpSaleContrHeaderVO1.hints.ImpSaleContractNo.tooltip}"
+                              id="it9" readOnly="true">
+                  <f:validator binding="#{row.bindings.ImpSaleContractNo.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="OrgName" sortable="true"
+                         headerText="Org Name" id="c16" width="130"
+                         align="center" filterable="true">
+                <af:outputText value="#{row.OrgName}" id="ot1"/>
+              </af:column>
+              <af:column sortProperty="ExportLcNo" filterable="true"
+                         sortable="true"
+                         headerText="ExportLC No"
+                         id="c5" width="80">
+                <af:inputText value="#{row.bindings.ExportLcNo.inputValue}"
+                              label="#{bindings.ImpSaleContrHeaderVO1.hints.ExportLcNo.label}"
+                              required="#{bindings.ImpSaleContrHeaderVO1.hints.ExportLcNo.mandatory}"
+                              columns="#{bindings.ImpSaleContrHeaderVO1.hints.ExportLcNo.displayWidth}"
+                              maximumLength="#{bindings.ImpSaleContrHeaderVO1.hints.ExportLcNo.precision}"
+                              shortDesc="#{bindings.ImpSaleContrHeaderVO1.hints.ExportLcNo.tooltip}"
+                              id="it6" readOnly="true">
+                  <f:validator binding="#{row.bindings.ExportLcNo.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="ContractDate" filterable="true"
+                         sortable="true"
+                         headerText="ContractDate"
+                         id="c14" align="center" width="80">
+                <f:facet name="filter">
+                  <af:inputDate value="#{vs.filterCriteria.ContractDate}"
+                                id="id4"/>
+                </f:facet>
+                <af:inputDate value="#{row.bindings.ContractDate.inputValue}"
+                              label="#{bindings.ImpSaleContrHeaderVO1.hints.ContractDate.label}"
+                              required="#{bindings.ImpSaleContrHeaderVO1.hints.ContractDate.mandatory}"
+                              shortDesc="#{bindings.ImpSaleContrHeaderVO1.hints.ContractDate.tooltip}"
+                              id="id5" readOnly="true">
+                  <f:validator binding="#{row.bindings.ContractDate.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.ImpSaleContrHeaderVO1.hints.ContractDate.format}"/>
+                </af:inputDate>
+              </af:column>
+              <af:column id="c4" headerText="Buyer" align="center"
+                         sortable="true" filterable="true" width="120"
+                         sortProperty="Buyer">
+                <af:outputText value="#{row.Buyer}" id="ot4"/>
+              </af:column>
+              <af:column id="c3" headerText="Season" align="center"
+                         sortable="true" filterable="true"
+                         sortProperty="Season">
+                <af:outputText value="#{row.Season}" id="ot5"/>
+              </af:column>
+              <af:column sortProperty="ContractAmmendNo" filterable="true"
+                         sortable="true"
+                         headerText="Contract Ammend Number"
+                         id="c9" align="center" width="90">
+                <af:inputText value="#{row.bindings.ContractAmmendNo.inputValue}"
+                              label="#{bindings.ImpSaleContrHeaderVO1.hints.ContractAmmendNo.label}"
+                              required="#{bindings.ImpSaleContrHeaderVO1.hints.ContractAmmendNo.mandatory}"
+                              columns="#{bindings.ImpSaleContrHeaderVO1.hints.ContractAmmendNo.displayWidth}"
+                              maximumLength="#{bindings.ImpSaleContrHeaderVO1.hints.ContractAmmendNo.precision}"
+                              shortDesc="#{bindings.ImpSaleContrHeaderVO1.hints.ContractAmmendNo.tooltip}"
+                              id="it14" readOnly="true">
+                  <f:validator binding="#{row.bindings.ContractAmmendNo.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="ContractAmmendDate" filterable="true"
+                         sortable="true"
+                         headerText="Contract Ammend Date"
+                         id="c21" align="center" width="80">
+                <f:facet name="filter">
+                  <af:inputDate value="#{vs.filterCriteria.ContractAmmendDate}"
+                                id="id3"/>
+                </f:facet>
+                <af:inputDate value="#{row.bindings.ContractAmmendDate.inputValue}"
+                              label="#{bindings.ImpSaleContrHeaderVO1.hints.ContractAmmendDate.label}"
+                              required="#{bindings.ImpSaleContrHeaderVO1.hints.ContractAmmendDate.mandatory}"
+                              shortDesc="#{bindings.ImpSaleContrHeaderVO1.hints.ContractAmmendDate.tooltip}"
+                              id="id2" readOnly="true">
+                  <f:validator binding="#{row.bindings.ContractAmmendDate.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.ImpSaleContrHeaderVO1.hints.ContractAmmendDate.format}"/>
+                </af:inputDate>
+              </af:column>
+              <af:column sortProperty="ContractValue" filterable="true"
+                         sortable="true"
+                         headerText="Contract Value"
+                         id="c6" align="center" width="90">
+                <af:inputText value="#{row.bindings.ContractValue.inputValue}"
+                              label="#{bindings.ImpSaleContrHeaderVO1.hints.ContractValue.label}"
+                              required="#{bindings.ImpSaleContrHeaderVO1.hints.ContractValue.mandatory}"
+                              columns="#{bindings.ImpSaleContrHeaderVO1.hints.ContractValue.displayWidth}"
+                              maximumLength="#{bindings.ImpSaleContrHeaderVO1.hints.ContractValue.precision}"
+                              shortDesc="#{bindings.ImpSaleContrHeaderVO1.hints.ContractValue.tooltip}"
+                              id="it17" readOnly="true">
+                  <f:validator binding="#{row.bindings.ContractValue.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.ImpSaleContrHeaderVO1.hints.ContractValue.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="ContractQuantity" filterable="true"
+                         sortable="true"
+                         headerText="Contract Quantity"
+                         id="c11" align="center" width="90">
+                <af:inputText value="#{row.bindings.ContractQuantity.inputValue}"
+                              label="#{bindings.ImpSaleContrHeaderVO1.hints.ContractQuantity.label}"
+                              required="#{bindings.ImpSaleContrHeaderVO1.hints.ContractQuantity.mandatory}"
+                              columns="#{bindings.ImpSaleContrHeaderVO1.hints.ContractQuantity.displayWidth}"
+                              maximumLength="#{bindings.ImpSaleContrHeaderVO1.hints.ContractQuantity.precision}"
+                              shortDesc="#{bindings.ImpSaleContrHeaderVO1.hints.ContractQuantity.tooltip}"
+                              id="it13" readOnly="true">
+                  <f:validator binding="#{row.bindings.ContractQuantity.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.ImpSaleContrHeaderVO1.hints.ContractQuantity.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="Created By"
+                         id="c1">
+                <af:outputText value="#{row.CreatedByName}" id="ot2"/>
+              </af:column>
+              <af:column sortProperty="CreationDate" filterable="true"
+                         sortable="true"
+                         headerText="Creation Date"
+                         id="c17" align="center" width="80">
+                <f:facet name="filter">
+                  <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                id="id7"/>
+                </f:facet>
+                <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                              label="#{bindings.ImpSaleContrHeaderVO1.hints.CreationDate.label}"
+                              required="#{bindings.ImpSaleContrHeaderVO1.hints.CreationDate.mandatory}"
+                              shortDesc="#{bindings.ImpSaleContrHeaderVO1.hints.CreationDate.tooltip}"
+                              id="id1" readOnly="true">
+                  <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.ImpSaleContrHeaderVO1.hints.CreationDate.format}"/>
+                </af:inputDate>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:panelGroupLayout>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

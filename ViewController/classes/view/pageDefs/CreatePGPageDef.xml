@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.62.29" id="CreatePGPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ImpSaleContrHeaderVO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="ImpSaleContrHeaderVO1Iterator"/>
+    <iterator Binds="ImpSaleContrLinesVO1" RangeSize="100"
+              DataControl="AppModuleDataControl"
+              id="ImpSaleContrLinesVO1Iterator"/>
+    <searchRegion Binds="ImpSaleContrLinesVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ImpSaleContrLinesVO1Query"/>
+    <iterator Binds="FillBPOVO1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="FillBPOVO1Iterator"/>
+    <searchRegion Binds="FillBPOVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="FillBPOVO1Query"/>
+    <iterator Binds="ImpSaleContractAmendVO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="ImpSaleContractAmendVO1Iterator"/>
+    <searchRegion Binds="ImpSaleContractAmendVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ImpSaleContractAmendVO1Query"/>
+    <iterator Binds="FillAmendVO1" RangeSize="1000"
+              DataControl="AppModuleDataControl" id="FillAmendVO1Iterator"/>
+    <searchRegion Binds="FillAmendVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="FillAmendVO1Query"/>
+    <iterator Binds="ImpSaleContractDetailEOView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="ImpSaleContractDetailEOView1Iterator"/>
+    <searchRegion Binds="ImpSaleContractDetailEOView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ImpSaleContractDetailEOView1Query"/>
+    <iterator Binds="StyleWiseQtyCalVo1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="StyleWiseQtyCalVo1Iterator"/>
+    <searchRegion Binds="StyleWiseQtyCalVo1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="StyleWiseQtyCalVo1Query"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="ImpSaleContractNo">
+      <AttrNames>
+        <Item Value="ImpSaleContractNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="ExportLcNo">
+      <AttrNames>
+        <Item Value="ExportLcNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="ContractDate">
+      <AttrNames>
+        <Item Value="ContractDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  id="AdvisingBank" Uses="LOV_AdvisingBank"/>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="IssuingBank">
+      <AttrNames>
+        <Item Value="IssuingBank"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  id="Division" Uses="LOV_Division"/>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  Uses="LOV_BranchName" id="BranchName"/>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  Uses="LOV_SalesTerms" id="SalesTerms"/>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  id="Currency" Uses="LOV_Currency"/>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="CommisionPerc">
+      <AttrNames>
+        <Item Value="CommisionPerc"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  Uses="LOV_CommisionType" id="CommisionType"/>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  Uses="LOV_Attribute3" id="Attribute3"/>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="NegotiationDays">
+      <AttrNames>
+        <Item Value="NegotiationDays"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  Uses="LOV_OrderType" id="OrderType"/>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  id="ExportLcReplace" Uses="LOV_ExportLcReplace"/>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="LastShipDate">
+      <AttrNames>
+        <Item Value="LastShipDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="ContractAmmendDate">
+      <AttrNames>
+        <Item Value="ContractAmmendDate"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="ImpSaleContrHeaderVO1Iterator" id="Attribute1"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Attribute1"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="VersionDate">
+      <AttrNames>
+        <Item Value="VersionDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="ContractAmmendNo">
+      <AttrNames>
+        <Item Value="ContractAmmendNo"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  id="Status1" Uses="LOV_Status1"/>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="SaleContractDocNo">
+      <AttrNames>
+        <Item Value="SaleContractDocNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="ImpSaleHeaderId">
+      <AttrNames>
+        <Item Value="ImpSaleHeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <tree IterBinding="ImpSaleContrLinesVO1Iterator" id="ImpSaleContrLinesVO1">
+      <nodeDefinition DefName="model.view.ImpSaleContrLinesVO"
+                      Name="ImpSaleContrLinesVO10">
+        <AttrNames>
+          <Item Value="StyleNo"/>
+          <Item Value="BpoNo"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="Quantity"/>
+          <Item Value="UnitPrice"/>
+          <Item Value="TotalValue"/>
+          <Item Value="OriginalBpo"/>
+          <Item Value="OriginalQuantity"/>
+          <Item Value="OriginalPrice"/>
+          <Item Value="OriginalTotalValue"/>
+          <Item Value="ShipExFactoryDate"/>
+          <Item Value="ShipCancelExBdDate"/>
+          <Item Value="LastQty"/>
+          <Item Value="LastPrice"/>
+          <Item Value="LastTotalPrice"/>
+          <Item Value="Status"/>
+          <Item Value="SalesTerm"/>
+          <Item Value="Attribute2"/>
+          <Item Value="OldBpo"/>
+          <Item Value="State"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="ImpSaleContrHeaderVO1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="FillBPOVO1Iterator" id="FillBPOVO1">
+      <nodeDefinition DefName="model.view.FillBPOVO" Name="FillBPOVO10">
+        <AttrNames>
+          <Item Value="CheckBox" Binds="CheckBox"/>
+          <Item Value="Style"/>
+          <Item Value="Classification"/>
+          <Item Value="Bpo"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="Quantity"/>
+          <Item Value="Unitprice"/>
+          <Item Value="Totalvalu"/>
+          <Item Value="Incoterms"/>
+          <Item Value="StyleDescription"/>
+          <Item Value="Totalvalue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="FillBPOVO1Iterator" id="CheckBox"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CheckBox"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator" id="VersionNo">
+      <AttrNames>
+        <Item Value="VersionNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator" id="OrgId1">
+      <AttrNames>
+        <Item Value="OrgId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator" id="BuyerId">
+      <AttrNames>
+        <Item Value="BuyerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="ContractQuantity">
+      <AttrNames>
+        <Item Value="ContractQuantity"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="ContractExpiryDate">
+      <AttrNames>
+        <Item Value="ContractExpiryDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="ContractValue">
+      <AttrNames>
+        <Item Value="ContractValue"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="GoodsValue">
+      <AttrNames>
+        <Item Value="GoodsValue"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ImpSaleContrHeaderVO1Iterator"
+                     id="CommissionValue">
+      <AttrNames>
+        <Item Value="CommissionValue"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="ImpSaleContractAmendVO1Iterator"
+          id="ImpSaleContractAmendVO1">
+      <nodeDefinition DefName="model.view.ImpSaleContractAmendVO"
+                      Name="ImpSaleContractAmendVO10">
+        <AttrNames>
+          <Item Value="StyleNo"/>
+          <Item Value="Attribute1"/>
+          <Item Value="BpoNo"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="Quantity"/>
+          <Item Value="UnitPrice"/>
+          <Item Value="TotalValue"/>
+          <Item Value="OriginalBpo"/>
+          <Item Value="OriginalQuantity"/>
+          <Item Value="OriginalPrice"/>
+          <Item Value="OriginalTotalValue"/>
+          <Item Value="ShipExFactoryDate"/>
+          <Item Value="ShipCancelExBdDate"/>
+          <Item Value="SalesTerm"/>
+          <Item Value="Status"/>
+          <Item Value="AmendSaleLineId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="ImpSaleDetailId"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="LastUpdatedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="FillAmendVO1Iterator" id="FillAmendVO1">
+      <nodeDefinition DefName="model.view.FillAmendVO" Name="FillAmendVO10">
+        <AttrNames>
+          <Item Value="ImpSaleHeaderId"/>
+          <Item Value="BuyerId"/>
+          <Item Value="BuyerName"/>
+          <Item Value="Style"/>
+          <Item Value="Bpo"/>
+          <Item Value="Season"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Quantity"/>
+          <Item Value="Price"/>
+          <Item Value="TotalValue"/>
+          <Item Value="SalesTerms"/>
+          <Item Value="LineId"/>
+          <Item Value="Classification"/>
+          <Item Value="IncoTerms"/>
+          <Item Value="ShipExFacDate"/>
+          <Item Value="ShipCancelBdDate"/>
+          <Item Value="CheckBox" Binds="CheckBox1"/>
+          <Item Value="CheckBoxAmend" Binds="CheckBoxAmend"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="FillAmendVO1Iterator" id="CheckBox1"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CheckBox"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="FillAmendVO1Iterator" id="CheckBoxAmend"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CheckBoxAmend"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="AppModuleDataControl"/>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  Uses="LOV_OrgName" id="OrgName"/>
+    <tree IterBinding="ImpSaleContractDetailEOView1Iterator"
+          id="ImpSaleContractDetailEOView1">
+      <nodeDefinition DefName="model.view.ImpSaleContractDetailEOView"
+                      Name="ImpSaleContractDetailEOView10">
+        <AttrNames>
+          <Item Value="ExportLcNo"/>
+          <Item Value="ExportLcDate"/>
+          <Item Value="ExportLcValue"/>
+          <Item Value="ExportLcQuantity"/>
+          <Item Value="LcIssuingBank"/>
+          <Item Value="AdvisedBank"/>
+          <Item Value="NegotiationDays"/>
+          <Item Value="SalesTerms"/>
+          <Item Value="Currency"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="ImpSaleContractAmendVO1Iterator" id="CreateInsert1"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="ImpSaleContractAmendVO1Iterator" id="Delete1"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="ImpSaleContractDetailEOView1Iterator"
+            id="CreateInsert2" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="ImpSaleContractDetailEOView1Iterator" id="Delete2"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="ImpSaleContrLinesVO1Iterator" id="Delete3"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="ImpSaleContrLinesVO1Iterator" id="setCurrentRowWithKey"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKey" NDType="java.lang.String"/>
+    </action>
+    <tree IterBinding="StyleWiseQtyCalVo1Iterator" id="StyleWiseQtyCalVo1">
+      <nodeDefinition DefName="model.view.StyleWiseQtyCalVo"
+                      Name="StyleWiseQtyCalVo10">
+        <AttrNames>
+          <Item Value="StyleNo"/>
+          <Item Value="Quantity"/>
+          <Item Value="UnitPrice"/>
+          <Item Value="TotalValue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  Uses="LOV_Season" id="Season"/>
+    <listOfValues StaticList="false" IterBinding="ImpSaleContrHeaderVO1Iterator"
+                  Uses="LOV_Buyer" id="Buyer"/>
+  </bindings>
+</pageDefinition>

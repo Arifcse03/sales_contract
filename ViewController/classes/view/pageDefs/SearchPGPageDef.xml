@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.62.29" id="SearchPGPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ImpSaleContrHeaderVO1" RangeSize="100"
+              DataControl="AppModuleDataControl"
+              id="ImpSaleContrHeaderVO1Iterator"/>
+    <searchRegion Criteria="ImpSaleContrHeaderVOCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="ImpSaleContrHeaderVO1Iterator"
+                  id="ImpSaleContrHeaderVOCriteriaQuery"/>
+    <invokeAction id="setSessionId" Binds="setSessionValues" Refresh="always"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ImpSaleContrHeaderVO1Iterator"
+          id="ImpSaleContrHeaderVO1">
+      <nodeDefinition DefName="model.view.ImpSaleContrHeaderVO"
+                      Name="ImpSaleContrHeaderVO10">
+        <AttrNames>
+          <Item Value="SaleContractDocNo"/>
+          <Item Value="VersionNo"/>
+          <Item Value="VersionDate"/>
+          <Item Value="ImpSaleContractNo"/>
+          <Item Value="OrgId"/>
+          <Item Value="OrderType"/>
+          <Item Value="ExportLcNo"/>
+          <Item Value="ContractDate"/>
+          <Item Value="BuyerNameNew"/>
+          <Item Value="Season"/>
+          <Item Value="ContractAmmendNo"/>
+          <Item Value="ContractAmmendDate"/>
+          <Item Value="ContractValue"/>
+          <Item Value="ContractQuantity"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="AdvisingBank"/>
+          <Item Value="BranchName"/>
+          <Item Value="BuyerId"/>
+          <Item Value="BuyerId2"/>
+          <Item Value="BuyerName"/>
+          <Item Value="Attribute10"/>
+          <Item Value="VersionNumberNew"/>
+          <Item Value="OrgName"/>
+          <Item Value="CreatedByName"/>
+          <Item Value="Buyer"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="ImpSaleContrHeaderVO1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="ImpSaleContrHeaderVO1Iterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="AppModuleDataControl"/>
+    <action IterBinding="ImpSaleContrHeaderVO1Iterator"
+            id="setCurrentRowWithKey" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKey" NDType="java.lang.String"/>
+    </action>
+    <methodAction id="setSessionValues"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setSessionValues"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="userId" NDValue="#{viewScope.UserId}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="respId" NDValue="#{viewScope.RespId}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

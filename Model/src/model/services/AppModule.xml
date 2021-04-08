@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AppModule"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  ClearCacheOnRollback="true"
+  ComponentInterface="model.services.common.AppModule"
+  ClientProxyName="model.services.client.AppModuleClient"
+  ComponentClass="model.services.AppModuleImpl"
+  DefClass="model.services.AppModuleDefImpl">
+  <DesignTime>
+    <Attr Name="_deployType" Value="0"/>
+    <Attr Name="_isDefCodegen" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewUsage
+    Name="FillBPOVO1"
+    ViewObjectName="model.view.FillBPOVO"/>
+  <ViewUsage
+    Name="ImpSaleContrHeaderVO1"
+    ViewObjectName="model.view.ImpSaleContrHeaderVO"/>
+  <ViewUsage
+    Name="FillAmendVO1"
+    ViewObjectName="model.view.FillAmendVO"/>
+  <ViewUsage
+    Name="ImpSaleContractDetailEOView1"
+    ViewObjectName="model.view.ImpSaleContractDetailEOView"/>
+  <ViewUsage
+    Name="ImpSaleContractAmendVO1"
+    ViewObjectName="model.view.ImpSaleContractAmendVO"/>
+  <ViewUsage
+    Name="ImpSaleContrLinesVO1"
+    ViewObjectName="model.view.ImpSaleContrLinesVO"/>
+  <ViewUsage
+    Name="StyleWiseQtyCalVo1"
+    ViewObjectName="model.view.StyleWiseQtyCalVo"/>
+  <ViewLinkUsage
+    Name="HeaderVO_VS_FillAmendVO_VL1"
+    ViewLinkObjectName="model.view.HeaderVO_VS_FillAmendVO_VL"
+    SrcViewUsageName="model.services.AppModule.ImpSaleContrHeaderVO1"
+    DstViewUsageName="model.services.AppModule.FillAmendVO1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="IedocImpSaleContrDetailKfLink1"
+    ViewLinkObjectName="model.view.IedocImpSaleContrDetailKfLink"
+    SrcViewUsageName="model.services.AppModule.ImpSaleContrHeaderVO1"
+    DstViewUsageName="model.services.AppModule.ImpSaleContractDetailEOView1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="DetailAmendLink1"
+    ViewLinkObjectName="model.view.DetailAmendLink"
+    SrcViewUsageName="model.services.AppModule.ImpSaleContractDetailEOView1"
+    DstViewUsageName="model.services.AppModule.ImpSaleContractAmendVO1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="headerVovialinevoVL1"
+    ViewLinkObjectName="model.view.headerVovialinevoVL"
+    SrcViewUsageName="model.services.AppModule.ImpSaleContrHeaderVO1"
+    DstViewUsageName="model.services.AppModule.ImpSaleContrLinesVO1"
+    Reversed="false"/>
+  <ClientInterface>
+    <Method
+      Name="setSessionValues">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="respId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ClientInterface>
+    <Method
+      Name="setSessionValues">
+      <Return
+        Type="void"/>
+      <Parameter
+        Name="userId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="respId"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+</AppModule>
