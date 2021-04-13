@@ -97,7 +97,8 @@ FROM (SELECT OHA.CUST_PO_NUMBER BPO_NUMBER, OLA.LINE_ID
 FROM OE_ORDER_HEADERS_ALL OHA, OE_ORDER_LINES_ALL OLA
 WHERE OHA.HEADER_ID = OLA.HEADER_ID) QUE
 WHERE LINE_ID = TO_NUMBER(ImpSaleContrLinesEO.ATTRIBUTE1)
-) ORIGINAL_BPO
+) ORIGINAL_BPO,
+(select b.CLASSIFICATION  from xx_om_bpo_info_t b  where b.bpo_id= ImpSaleContrLinesEO.BPO_ID)CLASSIFICATION
 FROM XX_COM_SALES_CONTRACT_L_T ImpSaleContrLinesEO]]>
   </SQLQuery>
   <EntityUsage
@@ -303,6 +304,21 @@ FROM XX_COM_SALES_CONTRACT_L_T ImpSaleContrLinesEO]]>
     SQLType="VARCHAR">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Classification"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CLASSIFICATION"
+    Expression="CLASSIFICATION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute

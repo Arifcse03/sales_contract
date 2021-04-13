@@ -172,6 +172,7 @@
           <Item Value="Attribute2"/>
           <Item Value="OldBpo"/>
           <Item Value="State"/>
+          <Item Value="Classification"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

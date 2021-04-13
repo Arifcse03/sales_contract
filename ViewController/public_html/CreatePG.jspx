@@ -394,7 +394,7 @@
                   <af:commandButton text="Delete All" id="cb8"
                                     actionListener="#{ManagedBean.deleteAllFromLine}"/>
                   <af:commandButton text="Fill BPO" id="cb9">
-                    <af:showPopupBehavior popupId="::p1" alignId="::f1"/>
+                    <af:showPopupBehavior popupId="::p1"/>
                   </af:commandButton>
                   <af:commandButton text="Export to Excel" id="cb10">
                     <af:exportCollectionActionListener exportedId="t2"
@@ -430,8 +430,13 @@
                     <af:spacer width="10" height="10" id="s4"/>
                   </af:commandLink>
                 </af:column>
+                <af:column headerText="Classification"
+                           id="c65" align="center" sortable="true"
+                           filterable="true" sortProperty="Classification">
+                  <af:outputText value="#{row.Classification}" id="ot20"/>
+                </af:column>
                 <af:column id="c32" headerText="Classification" align="center"
-                           sortable="true" filterable="true">
+                           sortable="true" filterable="true" visible="false">
                   <af:outputText value="#{row.Attribute2}" id="ot1"/>
                 </af:column>
                 <af:column sortProperty="BpoNo" filterable="true"
@@ -524,8 +529,14 @@
                     <af:convertDateTime pattern="#{bindings.ImpSaleContrLinesVO1.hints.ShipCancelExBdDate.format}"/>
                   </af:inputDate>
                 </af:column>
+                <af:column headerText="Original Bpo"
+                           id="c61" align="center" sortable="true"
+                           filterable="true" sortProperty="OriginalBpo"
+                           visible="false">
+                  <af:outputText value="#{row.OriginalBpo}" id="ot19"/>
+                </af:column>
                 <af:column id="c33" headerText="Original BPO" align="center"
-                           sortable="true" filterable="true">
+                           sortable="true" filterable="true" visible="true">
                   <af:outputText value="#{row.OldBpo}" id="ot2"/>
                 </af:column>
                 <af:column sortProperty="Quantity" filterable="true"
@@ -1308,7 +1319,8 @@
           </af:dialog>
         </af:popup>
         <af:popup id="p1"
-                  popupFetchListener="#{ManagedBean.editDialogListenerNew}">
+                  popupFetchListener="#{ManagedBean.editDialogListenerNew}"
+                  contentDelivery="lazyUncached">
           <af:dialog id="d2" title="Fill BPO"
                      dialogListener="#{ManagedBean.editDialogListenerNew}">
             <af:activeOutputText value="BPO's with unit Price = 0 or Quantity = 0 will not be populated." id="aot1"

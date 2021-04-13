@@ -543,19 +543,45 @@ public class ManagedBean {
     ViewObject populatevo = appM.getFillBPOVO1();
     String BuyerId = getBuyerid();
     String Season = getSeason1();
+    String unit=null;
+    
+        ViewObject vo = appM.getImpSaleContrHeaderVO1();
+        
+        try {
+
+            unit =
+                    vo.getCurrentRow().getAttribute("OrgId").toString();
+
+        } catch (Exception e) {
+            // TODO: Add catch code
+           unit=null;  ;
+        }
+    
     System.out.println(BuyerId);
     System.out.println(Season);
     System.out.println("Faraz 1------------->>");
     System.out.println("BuyerID = '"+ BuyerId +"'"+" AND SEASON = '"+ Season +"'");
     System.out.println("BPO Query--------->>>"+populatevo.getQuery());
+    
+    /****************added by arif******/
+    populatevo.clearCache();
+            populatevo.setWhereClause(null);
+            populatevo.setWhereClauseParam(0, unit);
+        populatevo.setWhereClauseParam(1, Season);
+        populatevo.setWhereClauseParam(2, BuyerId);
+            populatevo.executeQuery();
+            populatevo.first();
+    
+    
     // populatevo.setWhereClause
     // ("BUYER_NAME = " +"'"+BuyerName+"'"+" AND SEASON = "+"'"+Season+"'");
 
-    //populatevo.setWhereClause ("BUYER_NAME = '"+ BuyerName +"'"+" AND SEASON = '"+ Season +"'");
+    //populatevo.setWhereClause ("BUYER_ID = '"+ BuyerId +"'"+" AND SEASON = '"+ Season +"'"+" AND LC_UNIT = '"+ unit +"'");
     System.out.println("Faraz 2------------->>");
+       // populatevo.executeQuery();
     System.out.println("BuyerID = '"+ BuyerId +"'"+" AND SEASON = '"+ Season +"'");
 
-    populatevo.executeQuery();
+    //populatevo.executeQuery();
 
     System.out.println("Faraz 3------------->>");
     System.out.println("BuyerID = '"+ BuyerId +"'"+" AND SEASON = '"+ Season +"'");

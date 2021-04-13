@@ -21,36 +21,70 @@
         ResId="model.view.FillBPOVO_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
-  <Variable
-    Name="P_BUYER_ID"
-    Kind="where"
-    Type="java.lang.String">
-    <TransientExpression><![CDATA[adf.context.sessionScope.BuyerId]]></TransientExpression>
-  </Variable>
-  <Variable
-    Name="P_SEASON"
-    Kind="where"
-    Type="java.lang.String">
-    <TransientExpression><![CDATA[adf.context.sessionScope.Season]]></TransientExpression>
-  </Variable>
-  <Variable
-    Name="P_ORG_ID"
-    Kind="where"
-    Type="java.lang.String">
-    <TransientExpression><![CDATA[adf.context.sessionScope.OrgID]]></TransientExpression>
-  </Variable>
   <SQLQuery>
-    <![CDATA[SELECT STYLE,CLASSIFICATION,BPO,BPO_ID,ITEM_DESCRIPTION,STYLE_DESCRIPTION,QTY AS QUANTITY,ROUND(FOB,2) AS UNITPRICE,
-ROUND((QTY*FOB),2) AS "TOTALVALUE",SHIPDATE,ENDDATE,BPO_ID LINE_ID,INCOTERMS,VERSION_NO from XX_Order_Info_V where BPO_ID IN (
-SELECT V.BPO_ID FROM XX_Order_Info_V V,XX_COM_SALES_CONTRACT_L_T XXSCL WHERE V.BPO_ID=XXSCL.BPO_ID AND (V.STYLE<>XXSCL.STYLE_NO OR V.QTY<>XXSCL.LAST_QTY OR V.FOB<>XXSCL.LAST_PRICE OR V.BPO<>XXSCL.BPO_NO OR V.SHIPDATE<>XXSCL.SHIP_EX_FACTORY_DATE)) AND LC_UNIT=:P_ORG_ID AND SEASON=:P_SEASON AND BUYER_ID=:P_BUYER_ID
+    <![CDATA[/* Formatted on 4/13/2021 7:40:04 PM (QP5 v5.256.13226.35510) */
+SELECT STYLE,
+       CLASSIFICATION,
+       BPO,
+       BPO_ID,
+       ITEM_DESCRIPTION,
+       STYLE_DESCRIPTION,
+       QTY AS QUANTITY,
+       ROUND (FOB, 2) AS UNITPRICE,
+       ROUND ( (QTY * FOB), 2) AS "TOTALVALUE",
+       SHIPDATE,
+       ENDDATE,
+       BPO_ID LINE_ID,
+       INCOTERMS,
+       VERSION_NO,
+       BUYER_ID,
+       SEASON,
+       LC_UNIT
+  FROM XX_Order_Info_V
+ WHERE     BPO_ID IN (SELECT V.BPO_ID
+                        FROM XX_Order_Info_V V,
+                             XX_COM_SALES_CONTRACT_L_T XXSCL
+                       WHERE     V.BPO_ID = XXSCL.BPO_ID
+                             AND (   V.STYLE <> XXSCL.STYLE_NO
+                                  OR V.QTY <> XXSCL.LAST_QTY
+                                  OR V.FOB <> XXSCL.LAST_PRICE
+                                  OR V.BPO <> XXSCL.BPO_NO
+                             OR V.SHIPDATE <> XXSCL.SHIP_EX_FACTORY_DATE))
+   
+       AND LC_UNIT = :1
+       AND SEASON = :2
+       AND BUYER_ID = :3
 UNION ALL
-SELECT STYLE,CLASSIFICATION,BPO,BPO_ID,ITEM_DESCRIPTION,STYLE_DESCRIPTION,QTY AS QUANTITY,ROUND(FOB,2) AS UNITPRICE,
-ROUND((QTY*FOB),2) AS "TOTALVALUE",SHIPDATE,ENDDATE,BPO_ID LINE_ID,INCOTERMS,VERSION_NO from XX_Order_Info_V where BPO_ID NOT IN
-(SELECT XXSCL.BPO_ID FROM XX_COM_SALES_CONTRACT_L_T XXSCL,XX_COM_SALES_CONTRACT_H_T XXSCH
-WHERE XXSCL.IMP_SALE_HEADER_ID = XXSCH.IMP_SALE_HEADER_ID
-AND XXSCH.BUYER_ID = :P_BUYER_ID
-AND XXSCH.SEASON = :P_SEASON
-AND XXSCH.ORG_ID = :P_ORG_ID) AND LC_UNIT=:P_ORG_ID AND SEASON=:P_SEASON AND BUYER_ID=:P_BUYER_ID]]>
+SELECT STYLE,
+       CLASSIFICATION,
+       BPO,
+       BPO_ID,
+       ITEM_DESCRIPTION,
+       STYLE_DESCRIPTION,
+       QTY AS QUANTITY,
+       ROUND (FOB, 2) AS UNITPRICE,
+       ROUND ( (QTY * FOB), 2) AS "TOTALVALUE",
+       SHIPDATE,
+       ENDDATE,
+       BPO_ID LINE_ID,
+       INCOTERMS,
+       VERSION_NO,
+       BUYER_ID,
+       SEASON,
+       LC_UNIT
+  FROM XX_Order_Info_V
+ WHERE     BPO_ID NOT IN (SELECT XXSCL.BPO_ID
+                            FROM XX_COM_SALES_CONTRACT_L_T XXSCL,
+                                 XX_COM_SALES_CONTRACT_H_T XXSCH
+                           WHERE     XXSCL.IMP_SALE_HEADER_ID =
+                                        XXSCH.IMP_SALE_HEADER_ID
+                                AND XXSCH.BUYER_ID = :3
+                                 AND XXSCH.SEASON = :2
+                                 AND XXSCH.ORG_ID = :1
+                                                       )
+  AND LC_UNIT = :1
+       AND SEASON = :2
+       AND BUYER_ID = :3]]>
   </SQLQuery>
   <ViewAttribute
     Name="Style"
@@ -253,6 +287,49 @@ AND XXSCH.ORG_ID = :P_ORG_ID) AND LC_UNIT=:P_ORG_ID AND SEASON=:P_SEASON AND BUY
     SQLType="NUMERIC">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BuyerId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="BUYER_ID"
+    Expression="BUYER_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Season"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEASON"
+    Expression="SEASON"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LcUnit"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="LC_UNIT"
+    Expression="LC_UNIT"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute

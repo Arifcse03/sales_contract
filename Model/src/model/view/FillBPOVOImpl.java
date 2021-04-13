@@ -18,54 +18,6 @@ public class FillBPOVOImpl extends ViewObjectImpl {
     public FillBPOVOImpl() {
     }
 
-    /**
-     * Returns the bind variable value for P_BUYER_ID.
-     * @return bind variable value for P_BUYER_ID
-     */
-    public String getP_BUYER_ID() {
-        return (String)getNamedWhereClauseParam("P_BUYER_ID");
-    }
-
-    /**
-     * Sets <code>value</code> for bind variable P_BUYER_ID.
-     * @param value value to bind as P_BUYER_ID
-     */
-    public void setP_BUYER_ID(String value) {
-        setNamedWhereClauseParam("P_BUYER_ID", value);
-    }
-
-    /**
-     * Returns the bind variable value for P_SEASON.
-     * @return bind variable value for P_SEASON
-     */
-    public String getP_SEASON() {
-        return (String)getNamedWhereClauseParam("P_SEASON");
-    }
-
-    /**
-     * Sets <code>value</code> for bind variable P_SEASON.
-     * @param value value to bind as P_SEASON
-     */
-    public void setP_SEASON(String value) {
-        setNamedWhereClauseParam("P_SEASON", value);
-    }
-
-
-    /**
-     * Returns the bind variable value for P_ORG_ID.
-     * @return bind variable value for P_ORG_ID
-     */
-    public String getP_ORG_ID() {
-        return (String)getNamedWhereClauseParam("P_ORG_ID");
-    }
-
-    /**
-     * Sets <code>value</code> for bind variable P_ORG_ID.
-     * @param value value to bind as P_ORG_ID
-     */
-    public void setP_ORG_ID(String value) {
-        setNamedWhereClauseParam("P_ORG_ID", value);
-    }
 
     /**
      * executeQueryForCollection - overridden for custom java data source support.
@@ -99,4 +51,6 @@ public class FillBPOVOImpl extends ViewObjectImpl {
         long value = super.getQueryHitCount(viewRowSet);
         return value;
     }
+
+
 }
