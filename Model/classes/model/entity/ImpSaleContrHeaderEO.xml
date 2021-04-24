@@ -892,7 +892,8 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="XX_COM_SALES_CONTRACT_H_T">
+    TableName="XX_COM_SALES_CONTRACT_H_T"
+    DefaultValue="NO">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="20"/>
     </DesignTime>
