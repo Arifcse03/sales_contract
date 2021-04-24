@@ -20,7 +20,7 @@
     </SchemaBasedProperties>
   </Properties>
   <Variable
-    Name="P_STYLE_NO"
+    Name="P_BPO_ID"
     Kind="where"
     Type="java.lang.String"/>
   <Variable
@@ -28,9 +28,35 @@
     Kind="where"
     Type="java.lang.String"/>
   <SQLQuery>
-    <![CDATA[SELECT STYLE_NO STYLE_NO,  QUANTITY ,UNIT_PRICE,TOTAL_VALUE FROM XX_COM_SALES_CONTRACT_L_T WHERE STYLE_NO=:P_STYLE_NO AND IMP_SALE_HEADER_ID=:P_HEADER_ID
-UNION ALL
-SELECT 'TOTAL'  STYLE_NO ,SUM(QUANTITY)  QUANTITY,SUM(UNIT_PRICE) UNIT_PRICE ,SUM(TOTAL_VALUE) TOTAL_VALUE FROM XX_COM_SALES_CONTRACT_L_T WHERE STYLE_NO=:P_STYLE_NO AND IMP_SALE_HEADER_ID=:P_HEADER_ID]]>
+    <![CDATA[SELECT POCH.STYLE STYLE_NO ,BPO.BPO_ID, BPO.BPO,  SUM( BPO.QTY ) QUANTITY ,  POCL.FOB UNIT_PRICE   , SUM ( BPO.QTY * POCL.FOB) TOTAL_VALUE 
+ FROM XX_OM_POC_H_T POCH, XX_OM_POC_L_T POCL, XX_OM_BPO_INFO_T BPO 
+ WHERE POCH.POC_ID = POCL.POC_ID 
+ AND POCL.FOB_ID = BPO.FOB_ID
+ AND  POCH.POC_ID = (SELECT   POCH.POC_ID FROM XX_OM_POC_H_T POCH, XX_OM_POC_L_T POCL, XX_OM_BPO_INFO_T BPO
+                WHERE POCH.POC_ID = POCL.POC_ID 
+                 AND POCL.FOB_ID = BPO.FOB_ID
+                 AND BPO.BPO_ID = :P_BPO_ID )
+ AND BPO.BPO_ID IN 
+ (   SELECT   SCL.BPO_ID FROM XX_COM_SALES_CONTRACT_L_T SCL WHERE  SCL.IMP_SALE_HEADER_ID =:P_HEADER_ID
+     
+ )
+ GROUP BY  POCH.STYLE , POCL.FOB ,BPO.BPO , BPO.BPO_ID
+ 
+ UNION ALL
+ 
+SELECT 'TOTAL' STYLE_NO ,null, null,  SUM( BPO.QTY ) QUANTITY , null,   SUM ( BPO.QTY * POCL.FOB) TOTAL_VALUE 
+ FROM XX_OM_POC_H_T POCH, XX_OM_POC_L_T POCL, XX_OM_BPO_INFO_T BPO 
+ WHERE POCH.POC_ID = POCL.POC_ID 
+ AND POCL.FOB_ID = BPO.FOB_ID
+ AND  POCH.POC_ID = (SELECT   POCH.POC_ID FROM XX_OM_POC_H_T POCH, XX_OM_POC_L_T POCL, XX_OM_BPO_INFO_T BPO
+                WHERE POCH.POC_ID = POCL.POC_ID 
+                 AND POCL.FOB_ID = BPO.FOB_ID
+                 AND BPO.BPO_ID = :P_BPO_ID )
+ AND BPO.BPO_ID IN 
+ (   SELECT   SCL.BPO_ID FROM XX_COM_SALES_CONTRACT_L_T SCL WHERE  SCL.IMP_SALE_HEADER_ID =:P_HEADER_ID
+     
+ )
+ GROUP BY  POCH.STYLE]]>
   </SQLQuery>
   <ViewAttribute
     Name="StyleNo"
@@ -39,12 +65,42 @@ SELECT 'TOTAL'  STYLE_NO ,SUM(QUANTITY)  QUANTITY,SUM(UNIT_PRICE) UNIT_PRICE ,SU
     Precision="250"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    AliasName='STYLE_NO'
+    AliasName="STYLE_NO"
     SQLType="VARCHAR"
     IsUpdateable="false"
     Expression="STYLE_NO">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BpoId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="BPO_ID"
+    Expression="BPO_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Bpo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BPO"
+    Expression="BPO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute
