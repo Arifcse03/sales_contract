@@ -175,8 +175,8 @@ public class ManagedBean {
     flag = row.getAttribute("CheckBox").toString();
     // System.out.println("Flag Code -->" + flag);
     if (flag.equals("Y") && totalValue >0)
-       populateMaterialLines(row);
-    } 
+                    populateMaterialLines(row);
+            } 
     
     catch (Exception e) {
               ;
@@ -1148,32 +1148,50 @@ public class ManagedBean {
         return amendtable;
     }
      
-    public String getStyleNo(){
-            System.out.println("=========== Style GetStyleNo ========");
-            String style_no=null;
+    public String getBpoId(){
+          //  System.out.println("=========== Style GetStyleNo ========");
+            String bpoId=null;
             ViewObject vo = appM.getImpSaleContrLinesVO1();
-            style_no=vo.getCurrentRow().getAttribute("StyleNo").toString();
-            return style_no;
+            try {
+               bpoId=vo.getCurrentRow().getAttribute("BpoId").toString();
+           } catch (Exception e) {
+            // TODO: Add catch code
+              bpoId= null;
+           // e.printStackTrace();
+           }
+          
+          
+            return bpoId;
         }
     
-    public String getHeaderNo(){
-            System.out.println("=========== Style GetStyleNo ========");
-            String header_no=null;
+    public String getHeaderId(){
+         //   System.out.println("=========== Style GetStyleNo ========");
+            String headerId=null;
             ViewObject vo = appM.getImpSaleContrLinesVO1();
-            header_no=vo.getCurrentRow().getAttribute("ImpSaleHeaderId").toString();
-            return header_no;
+           
+                
+         try {
+            headerId=vo.getCurrentRow().getAttribute("ImpSaleHeaderId").toString();
+
+        } catch (Exception e) {
+            // TODO: Add catch code
+            headerId = null;
+            //e.printStackTrace();
+        }   
+            return headerId;
         }
      
     public void StyleWiseQtyCalu(PopupFetchEvent popupFetchEvent) {
         // Add event code here...
         
-        System.out.println("=========== Popup fatch lishner ========");
-        String style_no=getStyleNo();
-        String header_no=getHeaderNo();
+      //  System.out.println("=========== Popup fatch lishner ========");
+
+        String bpoId=getBpoId();
+        String headerId=getHeaderId();
     
         ViewObject vo = appM.getStyleWiseQtyCalVo1();
-        vo.setNamedWhereClauseParam("P_STYLE_NO", style_no);
-        vo.setNamedWhereClauseParam("P_HEADER_ID", header_no);
+        vo.setNamedWhereClauseParam("P_BPO_ID", bpoId);
+        vo.setNamedWhereClauseParam("P_HEADER_ID", headerId);
         vo.executeQuery();
 //        System.out.println("New query: " +vo.getQuery());
 //        System.out.println("=========== Popup style_no lishner ========"+style_no);

@@ -284,8 +284,7 @@
                                     label="Export LC / MoU"
                                     shortDesc="#{bindings.Attribute1.hints.tooltip}"
                                     id="sbc1" autoSubmit="true"
-                                    valueChangeListener="#{ManagedBean.ExportLCValueChange}"
-                                    selected="false"/>
+                                    valueChangeListener="#{ManagedBean.ExportLCValueChange}"/>
           <af:panelLabelAndMessage label=" Document No" id="plam5">
             <af:outputText value="#{bindings.SaleContractDocNo.inputValue}"
                            id="ot5">
@@ -327,7 +326,7 @@
                         columns="#{bindings.ImpSaleHeaderId.hints.displayWidth}"
                         maximumLength="#{bindings.ImpSaleHeaderId.hints.precision}"
                         shortDesc="#{bindings.ImpSaleHeaderId.hints.tooltip}"
-                        id="it7">
+                        id="it7" readOnly="true">
             <f:validator binding="#{bindings.ImpSaleHeaderId.validator}"/>
             <af:convertNumber groupingUsed="false"
                               pattern="#{bindings.ImpSaleHeaderId.format}"/>
@@ -418,6 +417,19 @@
                         rowSelection="single" id="t2"
                         binding="#{ManagedBean.originaltable}"
                         partialTriggers="::cb6 ::cb8 ::cb9 ::cb24 cl1">
+                <af:column headerText="#{bindings.ImpSaleContrLinesVO1.hints.BpoId.label}"
+                           id="c66" align="center" sortable="true"
+                           filterable="true" visible="false">
+                  <af:inputText value="#{row.bindings.BpoId.inputValue}"
+                                label="#{bindings.ImpSaleContrLinesVO1.hints.BpoId.label}"
+                                required="#{bindings.ImpSaleContrLinesVO1.hints.BpoId.mandatory}"
+                                columns="#{bindings.ImpSaleContrLinesVO1.hints.BpoId.displayWidth}"
+                                maximumLength="#{bindings.ImpSaleContrLinesVO1.hints.BpoId.precision}"
+                                shortDesc="#{bindings.ImpSaleContrLinesVO1.hints.BpoId.tooltip}"
+                                id="it8" readOnly="true">
+                    <f:validator binding="#{row.bindings.BpoId.validator}"/>
+                  </af:inputText>
+                </af:column>
                 <af:column sortProperty="StyleNo" filterable="true"
                            sortable="true"
                            headerText="Style No"
@@ -630,7 +642,7 @@
           </af:showDetailItem>
           <af:showDetailItem text="Export L / C" id="sdi2"
                              binding="#{ManagedBean.exportLCTab}"
-                             disabled="#{sessionScope.ExportLcFlag=='true'? 'false':'true'}"
+                             disabled="#{bindings.Attribute1.inputValue=='true'? 'false':'true'}"
                              partialTriggers="sbc1">
             <af:panelCollection id="pc3" styleClass="AFStretchWidth"
                                 inlineStyle="height:200.0px;">
@@ -1179,151 +1191,13 @@
             </af:panelHeader>
           </af:showDetailItem>
         </af:panelTabbed>
-        <af:popup id="p3" popupFetchListener="#{ManagedBean.StyleWiseQtyCalu}"
-                  contentDelivery="lazyUncached">
-          <af:dialog id="d4">
-            <af:panelCollection id="pc6"
-                                inlineStyle="width:580px; height:258px;">
-              <f:facet name="menus"/>
-              <f:facet name="toolbar"/>
-              <f:facet name="statusbar"/>
-              <af:table value="#{bindings.StyleWiseQtyCalVo1.collectionModel}"
-                        var="row"
-                        rows="#{bindings.StyleWiseQtyCalVo1.rangeSize}"
-                        emptyText="#{bindings.StyleWiseQtyCalVo1.viewable ? 'No data to display.' : 'Access Denied.'}"
-                        fetchSize="#{bindings.StyleWiseQtyCalVo1.rangeSize}"
-                        rowBandingInterval="1"
-                        filterModel="#{bindings.StyleWiseQtyCalVo1Query.queryDescriptor}"
-                        queryListener="#{bindings.StyleWiseQtyCalVo1Query.processQuery}"
-                        filterVisible="true" varStatus="vs" id="t11"
-                        binding="#{ManagedBean.styleWiseQtyCalu}">
-                <af:column sortProperty="StyleNo" filterable="true"
-                           sortable="true"
-                           headerText="Style No"
-                           id="c35" align="center">
-                  <af:outputText value="#{row.StyleNo}" id="ot15"/>
-                  <af:spacer width="10" height="10" id="s3"/>
-                </af:column>
-                <af:column sortProperty="Quantity" filterable="true"
-                           sortable="true"
-                           headerText="Qty"
-                           id="c55" align="center">
-                  <af:outputText value="#{row.Quantity}" id="ot3">
-                    <af:convertNumber groupingUsed="false"
-                                      pattern="#{bindings.StyleWiseQtyCalVo1.hints.Quantity.format}"/>
-                  </af:outputText>
-                </af:column>
-                <af:column sortProperty="UnitPrice" filterable="true"
-                           sortable="true"
-                           headerText="Unit Price"
-                           id="c60" align="center">
-                  <af:outputText value="#{row.UnitPrice}" id="ot18">
-                    <af:convertNumber groupingUsed="false"
-                                      pattern="#{bindings.StyleWiseQtyCalVo1.hints.UnitPrice.format}"/>
-                  </af:outputText>
-                </af:column>
-                <af:column sortProperty="TotalValue" filterable="true"
-                           sortable="true"
-                           headerText="Total Value"
-                           id="c59" align="center">
-                  <af:outputText value="#{row.TotalValue}" id="ot9">
-                    <af:convertNumber groupingUsed="false"
-                                      pattern="#{bindings.StyleWiseQtyCalVo1.hints.TotalValue.format}"/>
-                  </af:outputText>
-                </af:column>
-              </af:table>
-            </af:panelCollection>
-          </af:dialog>
-        </af:popup>
-        <af:popup id="p2" contentDelivery="lazyUncached">
-          <af:dialog id="d3" title="Fill BPO Amend"
-                     dialogListener="#{ManagedBean.editDialogListenerNew1}">
-            <af:panelCollection id="pc5" inlineStyle="width:873.0px;">
-              <f:facet name="menus"/>
-              <f:facet name="toolbar">
-                <af:toolbar id="t9">
-                  <af:commandButton text="Select All" id="cb22"
-                                    partialSubmit="true"
-                                    actionListener="#{ManagedBean.SelectAllAmend}"/>
-                  <af:commandButton text="De-Select All" id="cb23"
-                                    partialSubmit="true"
-                                    actionListener="#{ManagedBean.DeSelectAllAmend}"/>
-                </af:toolbar>
-              </f:facet>
-              <f:facet name="statusbar"/>
-              <af:table value="#{bindings.FillAmendVO1.collectionModel}"
-                        var="row" rows="#{bindings.FillAmendVO1.rangeSize}"
-                        emptyText="#{bindings.FillAmendVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
-                        fetchSize="#{bindings.FillAmendVO1.rangeSize}"
-                        rowBandingInterval="0"
-                        filterModel="#{bindings.FillAmendVO1Query.queryDescriptor}"
-                        queryListener="#{bindings.FillAmendVO1Query.processQuery}"
-                        filterVisible="true" varStatus="vs"
-                        selectionListener="#{bindings.FillAmendVO1.collectionModel.makeCurrent}" id="t10"
-                        binding="#{ManagedBean.amendTableNew}" width="100%"
-                        rowSelection="multiple">
-                <af:column headerText="Select"
-                           id="c58" align="center" width="40" sortable="true"
-                           filterable="true">
-                  <af:selectBooleanCheckbox value="#{row.bindings.CheckBoxAmend.inputValue}"
-                                            label="#{row.bindings.CheckBoxAmend.label}"
-                                            shortDesc="#{bindings.FillAmendVO1.hints.CheckBoxAmend.tooltip}"
-                                            id="sbc3"/>
-                </af:column>
-                <af:column sortProperty="Style" filterable="true"
-                           sortable="false"
-                           headerText="Style "
-                           id="c63" align="center">
-                  <af:outputText value="#{row.Style}" id="ot28"/>
-                </af:column>
-                <af:column sortProperty="Classification" filterable="true"
-                           sortable="false"
-                           headerText="Classification"
-                           id="c67" align="center">
-                  <af:outputText value="#{row.Classification}" id="ot36"/>
-                </af:column>
-                <af:column sortProperty="Bpo" filterable="true" sortable="false"
-                           headerText="BPO"
-                           id="c69" align="center">
-                  <af:outputText value="#{row.Bpo}" id="ot37"/>
-                </af:column>
-                <af:column sortProperty="ItemDesc" filterable="true"
-                           sortable="false"
-                           headerText="ItemDesc"
-                           id="c70" align="center">
-                  <af:outputText value="#{row.ItemDesc}" id="ot29"/>
-                </af:column>
-                <af:column sortProperty="Quantity" filterable="true"
-                           sortable="false"
-                           headerText="Quantity"
-                           id="c62" align="center">
-                  <af:outputText value="#{row.Quantity}" id="ot33">
-                    <af:convertNumber groupingUsed="false"
-                                      pattern="#{bindings.FillAmendVO1.hints.Quantity.format}"/>
-                  </af:outputText>
-                </af:column>
-                <af:column sortProperty="SalesTerms" filterable="true"
-                           sortable="false"
-                           headerText="SalesTerms"
-                           id="c68" align="center">
-                  <af:outputText value="#{row.SalesTerms}" id="ot27"/>
-                </af:column>
-                <af:column sortProperty="IncoTerms" filterable="true"
-                           sortable="false"
-                           headerText="IncoTerms"
-                           id="c64" align="center">
-                  <af:outputText value="#{row.IncoTerms}" id="ot30"/>
-                </af:column>
-              </af:table>
-            </af:panelCollection>
-          </af:dialog>
-        </af:popup>
         <af:popup id="p1"
                   popupFetchListener="#{ManagedBean.editDialogListenerNew}"
                   contentDelivery="lazyUncached">
           <af:dialog id="d2" title="Fill BPO"
                      dialogListener="#{ManagedBean.editDialogListenerNew}">
-            <af:activeOutputText value="BPO's with unit Price = 0 or Quantity = 0 will not be populated." id="aot1"
+            <af:activeOutputText value="BPO's with unit Price = 0 or Quantity = 0 will not be populated."
+                                 id="aot1"
                                  inlineStyle="color:rgb(255,148,148); font-size:medium;"/>
             <af:outputText id="ot17"
                            value="#{bindings.FillBPOVO1Iterator.estimatedRowCount}"
@@ -1367,56 +1241,175 @@
                                             id="sbc2" autoSubmit="true"/>
                 </af:column>
                 <af:column sortProperty="Style" filterable="true"
-                           sortable="true"
-                           headerText="Style"
-                           id="c23" align="center">
+                           sortable="true" headerText="Style" id="c23"
+                           align="center">
                   <af:outputText value="#{row.Style}" id="ot14"/>
                 </af:column>
                 <af:column sortProperty="Classification" filterable="true"
-                           sortable="true"
-                           headerText="Classification"
-                           id="c19" align="center">
+                           sortable="true" headerText="Classification" id="c19"
+                           align="center">
                   <af:outputText value="#{row.Classification}" id="ot11"/>
                 </af:column>
                 <af:column sortProperty="Bpo" filterable="true" sortable="true"
-                           headerText="BPO"
-                           id="c25" align="center">
+                           headerText="BPO" id="c25" align="center">
                   <af:outputText value="#{row.Bpo}" id="ot16"/>
                 </af:column>
-                <af:column headerText="ItemDescription"
-                           id="c26">
+                <af:column headerText="ItemDescription" id="c26">
                   <af:outputText value="#{row.StyleDescription}" id="ot7"/>
                 </af:column>
                 <af:column sortProperty="Quantity" filterable="true"
-                           sortable="true"
-                           headerText="Quantity"
-                           id="c21" align="center">
+                           sortable="true" headerText="Quantity" id="c21"
+                           align="center">
                   <af:outputText value="#{row.Quantity}" id="ot12">
                     <af:convertNumber groupingUsed="false"
                                       pattern="#{bindings.FillBPOVO1.hints.Quantity.format}"/>
                   </af:outputText>
                 </af:column>
                 <af:column sortProperty="Unitprice" filterable="true"
-                           sortable="true"
-                           headerText="Unit Price"
-                           id="c20" align="center">
+                           sortable="true" headerText="Unit Price" id="c20"
+                           align="center">
                   <af:outputText value="#{row.Unitprice}" id="ot13">
                     <af:convertNumber groupingUsed="false"
                                       pattern="#{bindings.FillBPOVO1.hints.Unitprice.format}"/>
                   </af:outputText>
                 </af:column>
-                <af:column headerText="Total"
-                           id="c27">
+                <af:column headerText="Total" id="c27">
                   <af:outputText value="#{row.Totalvalue}" id="ot10">
                     <af:convertNumber groupingUsed="false"
                                       pattern="#{bindings.FillBPOVO1.hints.Totalvalue.format}"/>
                   </af:outputText>
                 </af:column>
                 <af:column sortProperty="Incoterms" filterable="true"
-                           sortable="true"
-                           headerText="Incoterms"
-                           id="c24" align="center">
+                           sortable="true" headerText="Incoterms" id="c24"
+                           align="center">
                   <af:outputText value="#{row.Incoterms}" id="ot6"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="p2" contentDelivery="lazyUncached">
+          <af:dialog id="d3" title="Fill BPO Amend"
+                     dialogListener="#{ManagedBean.editDialogListenerNew1}">
+            <af:panelCollection id="pc5" inlineStyle="width:873.0px;">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t9">
+                  <af:commandButton text="Select All" id="cb22"
+                                    partialSubmit="true"
+                                    actionListener="#{ManagedBean.SelectAllAmend}"/>
+                  <af:commandButton text="De-Select All" id="cb23"
+                                    partialSubmit="true"
+                                    actionListener="#{ManagedBean.DeSelectAllAmend}"/>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.FillAmendVO1.collectionModel}"
+                        var="row" rows="#{bindings.FillAmendVO1.rangeSize}"
+                        emptyText="#{bindings.FillAmendVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.FillAmendVO1.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.FillAmendVO1Query.queryDescriptor}"
+                        queryListener="#{bindings.FillAmendVO1Query.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectionListener="#{bindings.FillAmendVO1.collectionModel.makeCurrent}"
+                        id="t10" binding="#{ManagedBean.amendTableNew}"
+                        width="100%" rowSelection="multiple">
+                <af:column headerText="Select" id="c58" align="center"
+                           width="40" sortable="true" filterable="true">
+                  <af:selectBooleanCheckbox value="#{row.bindings.CheckBoxAmend.inputValue}"
+                                            label="#{row.bindings.CheckBoxAmend.label}"
+                                            shortDesc="#{bindings.FillAmendVO1.hints.CheckBoxAmend.tooltip}"
+                                            id="sbc3"/>
+                </af:column>
+                <af:column sortProperty="Style" filterable="true"
+                           sortable="false" headerText="Style " id="c63"
+                           align="center">
+                  <af:outputText value="#{row.Style}" id="ot28"/>
+                </af:column>
+                <af:column sortProperty="Classification" filterable="true"
+                           sortable="false" headerText="Classification" id="c67"
+                           align="center">
+                  <af:outputText value="#{row.Classification}" id="ot36"/>
+                </af:column>
+                <af:column sortProperty="Bpo" filterable="true" sortable="false"
+                           headerText="BPO" id="c69" align="center">
+                  <af:outputText value="#{row.Bpo}" id="ot37"/>
+                </af:column>
+                <af:column sortProperty="ItemDesc" filterable="true"
+                           sortable="false" headerText="ItemDesc" id="c70"
+                           align="center">
+                  <af:outputText value="#{row.ItemDesc}" id="ot29"/>
+                </af:column>
+                <af:column sortProperty="Quantity" filterable="true"
+                           sortable="false" headerText="Quantity" id="c62"
+                           align="center">
+                  <af:outputText value="#{row.Quantity}" id="ot33">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.FillAmendVO1.hints.Quantity.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="SalesTerms" filterable="true"
+                           sortable="false" headerText="SalesTerms" id="c68"
+                           align="center">
+                  <af:outputText value="#{row.SalesTerms}" id="ot27"/>
+                </af:column>
+                <af:column sortProperty="IncoTerms" filterable="true"
+                           sortable="false" headerText="IncoTerms" id="c64"
+                           align="center">
+                  <af:outputText value="#{row.IncoTerms}" id="ot30"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="p3" popupFetchListener="#{ManagedBean.StyleWiseQtyCalu}"
+                  contentDelivery="lazyUncached">
+          <af:dialog id="d4">
+            <af:panelCollection id="pc6"
+                                inlineStyle="width:580px; height:258px;">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.StyleWiseQtyCalVo1.collectionModel}"
+                        var="row"
+                        rows="#{bindings.StyleWiseQtyCalVo1.rangeSize}"
+                        emptyText="#{bindings.StyleWiseQtyCalVo1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.StyleWiseQtyCalVo1.rangeSize}"
+                        rowBandingInterval="1"
+                        filterModel="#{bindings.StyleWiseQtyCalVo1Query.queryDescriptor}"
+                        queryListener="#{bindings.StyleWiseQtyCalVo1Query.processQuery}"
+                        filterVisible="true" varStatus="vs" id="t11"
+                        binding="#{ManagedBean.styleWiseQtyCalu}">
+                <af:column sortProperty="StyleNo" filterable="true"
+                           sortable="true" headerText="Style No" id="c35"
+                           align="center">
+                  <af:outputText value="#{row.StyleNo}" id="ot15"/>
+                  <af:spacer width="10" height="10" id="s3"/>
+                </af:column>
+                <af:column sortProperty="Quantity" filterable="true"
+                           sortable="true" headerText="Qty" id="c55"
+                           align="center">
+                  <af:outputText value="#{row.Quantity}" id="ot3">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.StyleWiseQtyCalVo1.hints.Quantity.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="UnitPrice" filterable="true"
+                           sortable="true" headerText="Unit Price" id="c60"
+                           align="center">
+                  <af:outputText value="#{row.UnitPrice}" id="ot18">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.StyleWiseQtyCalVo1.hints.UnitPrice.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="TotalValue" filterable="true"
+                           sortable="true" headerText="Total Value" id="c59"
+                           align="center">
+                  <af:outputText value="#{row.TotalValue}" id="ot9">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.StyleWiseQtyCalVo1.hints.TotalValue.format}"/>
+                  </af:outputText>
                 </af:column>
               </af:table>
             </af:panelCollection>
