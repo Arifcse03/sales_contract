@@ -419,7 +419,8 @@
                         partialTriggers="::cb6 ::cb8 ::cb9 ::cb24 cl1">
                 <af:column headerText="#{bindings.ImpSaleContrLinesVO1.hints.BpoId.label}"
                            id="c66" align="center" sortable="true"
-                           filterable="true" visible="false">
+                           filterable="true" visible="true"
+                           sortProperty="BpoId">
                   <af:inputText value="#{row.bindings.BpoId.inputValue}"
                                 label="#{bindings.ImpSaleContrLinesVO1.hints.BpoId.label}"
                                 required="#{bindings.ImpSaleContrLinesVO1.hints.BpoId.mandatory}"
@@ -1205,7 +1206,7 @@
                            binding="#{ManagedBean.fillBPORowCount}"
                            visible="false"/>
             <af:panelCollection id="pc2"
-                                inlineStyle="width:950px; height:450.0px;">
+                                inlineStyle="width:1200px; height:450.0px;">
               <f:facet name="menus"/>
               <f:facet name="toolbar">
                 <af:toolbar id="t4">
@@ -1283,6 +1284,21 @@
                            sortable="true" headerText="Incoterms" id="c24"
                            align="center">
                   <af:outputText value="#{row.Incoterms}" id="ot6"/>
+                </af:column>
+                <af:column headerText="#{bindings.FillBPOVO1.hints.BpoId.label}"
+                           id="c71" align="center" sortable="true"
+                           filterable="true" sortProperty="BpoId">
+                  <af:inputText value="#{row.bindings.BpoId.inputValue}"
+                                label="#{bindings.FillBPOVO1.hints.BpoId.label}"
+                                required="#{bindings.FillBPOVO1.hints.BpoId.mandatory}"
+                                columns="#{bindings.FillBPOVO1.hints.BpoId.displayWidth}"
+                                maximumLength="#{bindings.FillBPOVO1.hints.BpoId.precision}"
+                                shortDesc="#{bindings.FillBPOVO1.hints.BpoId.tooltip}"
+                                id="it44" readOnly="true">
+                    <f:validator binding="#{row.bindings.BpoId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.FillBPOVO1.hints.BpoId.format}"/>
+                  </af:inputText>
                 </af:column>
               </af:table>
             </af:panelCollection>

@@ -170,16 +170,16 @@ public class ManagedBean {
     for (Row row : r) {
  //   System.out.println("loop count");
     try {
-    totalValue =Double.parseDouble(row.getAttribute("Totalvalue").toString()) ;
-    // System.out.println(" Total Value -->" + totalValue);    
-    flag = row.getAttribute("CheckBox").toString();
-    // System.out.println("Flag Code -->" + flag);
-    if (flag.equals("Y") && totalValue >0)
-                    populateMaterialLines(row);
-            } 
+        totalValue =Double.parseDouble(row.getAttribute("Totalvalue").toString()) ;
+        // System.out.println(" Total Value -->" + totalValue);    
+        flag = row.getAttribute("CheckBox").toString();
+        // System.out.println("Flag Code -->" + flag);
+        if (flag.equals("Y") && totalValue >0)
+                        populateMaterialLines(row);
+      } 
     
     catch (Exception e) {
-              ;
+            e.printStackTrace();   
           }
 
     }
@@ -249,7 +249,6 @@ public class ManagedBean {
 
   if (bpoIdMatchedRows.length==0) {
       
-     System.out.println("  === bpoIdMatchedRows.length==0 ==   ");
      
      linerow = createMaterialLines(); //getImpSaleContrLines1();
      
@@ -296,9 +295,6 @@ public class ManagedBean {
   
   
   else{
-      
-      
-     System.out.println("=========  ELSE =============   ");
       
       linerow = bpoIdMatchedRows[0];
       
@@ -354,14 +350,14 @@ public class ManagedBean {
   
         public Row createMaterialLines() {
             
-            System.out.println("===================== createMaterialLines step-1==================");
+           // System.out.println("===================== createMaterialLines step-1==================");
             ViewObject vo = appM.getImpSaleContrLinesVO1();
-            System.out.println("===================== createMaterialLines step-2==================");
+           // System.out.println("===================== createMaterialLines step-2==================");
             Row row = vo.createRow();
-            System.out.println("===================== createMaterialLines step-3==================");
+         //   System.out.println("===================== createMaterialLines step-3==================");
           //  vo.insertRow(row);
             vo.insertRow(row);
-            System.out.println("===================== createMaterialLines step-4==================");
+        //    System.out.println("===================== createMaterialLines step-4==================");
             row.setNewRowState(Row.STATUS_INITIALIZED);
             return row;
         } //end of createHeader
@@ -372,7 +368,7 @@ public class ManagedBean {
        
         try {
             value = r.getAttribute(columnName).toString();
-            System.out.println("===================== getPopulateValue =================="+value);
+           // System.out.println("===================== getPopulateValue =================="+value);
         } catch (Exception e) {
                  ;
             }
@@ -388,14 +384,14 @@ public class ManagedBean {
         HttpSession userSession = (HttpSession) ectx.getSession(false);
         String vVersionNo=null;
         
-        System.out.println("ABC ----->>>>123");
+      //  System.out.println("ABC ----->>>>123");
         try {           //System.out.println("ABC ----->>>>"+getVersionNo_Bind().getValue().toString());
         vVersionNo=bind_VersionNo.getValue().toString();
-        System.out.println("ABC ---SA-->>>>123   "+vVersionNo);
+      //  System.out.println("ABC ---SA-->>>>123   "+vVersionNo);
                                   
         userSession.setAttribute("VersionNo",vVersionNo);    
                                 
-        System.out.println("ABC ----->>>>"+vVersionNo);
+       // System.out.println("ABC ----->>>>"+vVersionNo);
                            }
         catch (Exception e ){
             System.out.println("Error "+e.getMessage());
@@ -423,7 +419,7 @@ public class ManagedBean {
         HttpSession userSession = (HttpSession) ectx.getSession(false);
         String vBuyerName=null;
         
-        System.out.println("ABC ---BUYERNAME-->>>>123");
+     //   System.out.println("ABC ---BUYERNAME-->>>>123");
         try {           //System.out.println("ABC ----->>>>"+getVersionNo_Bind().getValue().toString());
         vBuyerName =buyerNameNew.getValue().toString();//   getBuyerNameNew().getValue().toString();
         // System.out.println("Buyer Name------->>"+ vBuyerName);
@@ -446,11 +442,11 @@ public class ManagedBean {
         HttpSession userSession = (HttpSession)ectx.getSession(false);
         String vSeason = null;
 
-        System.out.println("ABC ----->>>>123");
+       // System.out.println("ABC ----->>>>123");
         try { //System.out.println("ABC ----->>>>"+getVersionNo_Bind().getValue().toString());
             vSeason =
                     season.getValue().toString(); // getSeason().getValue().toString();
-            System.out.println("Season------->>" + vSeason);
+         //   System.out.println("Season------->>" + vSeason);
             userSession.setAttribute("Season", vSeason);
         } catch (Exception e) {
             //   System.out.println("Error "+e.getMessage());
@@ -470,13 +466,13 @@ public class ManagedBean {
         HttpSession userSession = (HttpSession) ectx.getSession(false);
         String vOrgID=null;
         
-        System.out.println("ABC --ORG_ID--->>>>123");
+    //    System.out.println("ABC --ORG_ID--->>>>123");
         try {           //System.out.println("ABC ----->>>>"+getVersionNo_Bind().getValue().toString());
         vOrgID=bind_OrgID.getValue().toString();  //getBind_OrgID().getValue().toString();                           
          
                                
              userSession.setAttribute("OrgID",vOrgID);    
-             System.out.println("ABC1 --- ORG_ID----->>>>"+vOrgID);
+          //   System.out.println("ABC1 --- ORG_ID----->>>>"+vOrgID);
             
             }
         
@@ -498,7 +494,7 @@ public class ManagedBean {
         HttpSession userSession = (HttpSession) ectx.getSession(false);
         String vBuyerId=null;
         
-        System.out.println("ABC ---BUYER_ID-->>>>123");
+       // System.out.println("ABC ---BUYER_ID-->>>>123");
         try {           //System.out.println("ABC ----->>>>"+getVersionNo_Bind().getValue().toString());
     
          vBuyerId =buyerId.getValue().toString();//   getBuyerNameNew().getValue().toString();       
@@ -559,9 +555,9 @@ public class ManagedBean {
     
     System.out.println(BuyerId);
     System.out.println(Season);
-    System.out.println("Faraz 1------------->>");
+  //  System.out.println("Faraz 1------------->>");
     System.out.println("BuyerID = '"+ BuyerId +"'"+" AND SEASON = '"+ Season +"'");
-    System.out.println("BPO Query--------->>>"+populatevo.getQuery());
+  //  System.out.println("BPO Query--------->>>"+populatevo.getQuery());
     
     /****************added by arif******/
     populatevo.clearCache();
@@ -577,17 +573,17 @@ public class ManagedBean {
     // ("BUYER_NAME = " +"'"+BuyerName+"'"+" AND SEASON = "+"'"+Season+"'");
 
     //populatevo.setWhereClause ("BUYER_ID = '"+ BuyerId +"'"+" AND SEASON = '"+ Season +"'"+" AND LC_UNIT = '"+ unit +"'");
-    System.out.println("Faraz 2------------->>");
+ //   System.out.println("Faraz 2------------->>");
        // populatevo.executeQuery();
-    System.out.println("BuyerID = '"+ BuyerId +"'"+" AND SEASON = '"+ Season +"'");
+ //   System.out.println("BuyerID = '"+ BuyerId +"'"+" AND SEASON = '"+ Season +"'");
 
     //populatevo.executeQuery();
 
-    System.out.println("Faraz 3------------->>");
-    System.out.println("BuyerID = '"+ BuyerId +"'"+" AND SEASON = '"+ Season +"'");
+//    System.out.println("Faraz 3------------->>");
+//    System.out.println("BuyerID = '"+ BuyerId +"'"+" AND SEASON = '"+ Season +"'");
     
-    System.out.println("Faraz 4 ------------->>");
-    System.out.println("populatevo.getRowCount() "+populatevo.getRowCount());
+  //  System.out.println("Faraz 4 ------------->>");
+ //   System.out.println("populatevo.getRowCount() "+populatevo.getRowCount());
 
   /*  if (populatevo.getRowCount() == 0) {
     System.out.println("populatevo.getRowCount() "+populatevo.getRowCount());

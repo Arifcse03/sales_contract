@@ -22,8 +22,7 @@
     </SchemaBasedProperties>
   </Properties>
   <SQLQuery>
-    <![CDATA[/* Formatted on 4/13/2021 7:40:04 PM (QP5 v5.256.13226.35510) */
-SELECT STYLE,
+    <![CDATA[SELECT STYLE,
        CLASSIFICATION,
        BPO,
        BPO_ID,
@@ -54,7 +53,10 @@ SELECT STYLE,
        AND LC_UNIT = :1
        AND SEASON = :2
        AND BUYER_ID = :3
+     --  and BPO_ID =:p_bpo_id
+     
 UNION ALL
+
 SELECT STYLE,
        CLASSIFICATION,
        BPO,
@@ -72,19 +74,23 @@ SELECT STYLE,
        BUYER_ID,
        SEASON,
        LC_UNIT
-  FROM XX_Order_Info_V
- WHERE     BPO_ID NOT IN (SELECT XXSCL.BPO_ID
+  FROM XX_Order_Info_V  v
+  WHERE  1=1
+ 
+ and    not exists (SELECT XXSCL.BPO_ID
                             FROM XX_COM_SALES_CONTRACT_L_T XXSCL,
                                  XX_COM_SALES_CONTRACT_H_T XXSCH
                            WHERE     XXSCL.IMP_SALE_HEADER_ID =
                                         XXSCH.IMP_SALE_HEADER_ID
-                                AND XXSCH.BUYER_ID = :3
-                                 AND XXSCH.SEASON = :2
-                                 AND XXSCH.ORG_ID = :1
-                                                       )
-  AND LC_UNIT = :1
-       AND SEASON = :2
-       AND BUYER_ID = :3]]>
+                                AND XXSCH.BUYER_ID = V.BUYER_ID
+                                 AND XXSCH.SEASON = V.SEASON
+                                 AND XXSCH.ORG_ID =  V.LC_UNIT
+     AND  XXSCL.BPO_ID = v.bpo_id
+                    )
+                    
+   AND LC_UNIT = :1
+   AND SEASON = :2
+   AND BUYER_ID = :3]]>
   </SQLQuery>
   <ViewAttribute
     Name="Style"

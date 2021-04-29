@@ -183,6 +183,7 @@
           <Item Value="Incoterms"/>
           <Item Value="StyleDescription"/>
           <Item Value="Totalvalue"/>
+          <Item Value="BpoId"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
