@@ -370,7 +370,6 @@
                   <af:resetActionListener/>
                 </af:commandButton>
                 <af:commandButton text="Generate Report" id="cb3"/>
-                <af:commandButton text="Attach Document" id="cb4"/>
               </af:panelGroupLayout>
             </af:group>
           </f:facet>
@@ -1199,7 +1198,8 @@
                      dialogListener="#{ManagedBean.editDialogListenerNew}">
             <af:activeOutputText value="BPO's with unit Price = 0 or Quantity = 0 will not be populated."
                                  id="aot1"
-                                 inlineStyle="color:rgb(255,148,148); font-size:medium;"/>
+                                 inlineStyle="color:rgb(255,148,148); font-size:medium;"
+                                 rendered="false"/>
             <af:outputText id="ot17"
                            value="#{bindings.FillBPOVO1Iterator.estimatedRowCount}"
                            partialTriggers="pc2:t3"

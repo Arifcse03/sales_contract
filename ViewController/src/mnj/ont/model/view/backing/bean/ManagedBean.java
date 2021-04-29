@@ -42,6 +42,9 @@ import oracle.jbo.RowSet;
 import oracle.jbo.RowSetIterator;
 import oracle.jbo.ViewObject;
 
+import org.apache.myfaces.trinidad.render.ExtendedRenderKitService;
+import org.apache.myfaces.trinidad.util.Service;
+
 public class ManagedBean {
     
     private RichTable matTable;
@@ -165,16 +168,14 @@ public class ManagedBean {
     ViewObject populatevo = appM.getFillBPOVO1();
     System.out.println("================== callBpoFetch() :"+ populatevo.getAllRowsInRange().length);
     String flag;
-    Double totalValue;
     Row r[] = populatevo.getAllRowsInRange();
     for (Row row : r) {
  //   System.out.println("loop count");
     try {
-        totalValue =Double.parseDouble(row.getAttribute("Totalvalue").toString()) ;
         // System.out.println(" Total Value -->" + totalValue);    
         flag = row.getAttribute("CheckBox").toString();
         // System.out.println("Flag Code -->" + flag);
-        if (flag.equals("Y") && totalValue >0)
+        if ( flag.equals("Y") )
                         populateMaterialLines(row);
       } 
     
@@ -1194,7 +1195,6 @@ public class ManagedBean {
 //        System.out.println("=========== Popup header_no lishner ========"+header_no);
         AdfFacesContext.getCurrentInstance().addPartialTarget(styleWiseQtyCalu);
     }
-
     public void setStyleWiseQtyCalu(RichTable styleWiseQtyCalu) {
         this.styleWiseQtyCalu = styleWiseQtyCalu;
     }
