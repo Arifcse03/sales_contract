@@ -287,7 +287,7 @@
                                     valueChangeListener="#{ManagedBean.ExportLCValueChange}"/>
           <af:panelLabelAndMessage label=" Document No" id="plam5">
             <af:outputText value="#{bindings.SaleContractDocNo.inputValue}"
-                           id="ot5">
+                           id="ot5" binding="#{ManagedBean.documentNumber}">
               <af:convertNumber groupingUsed="false"
                                 pattern="#{bindings.SaleContractDocNo.format}"/>
             </af:outputText>
@@ -370,6 +370,8 @@
                   <af:resetActionListener/>
                 </af:commandButton>
                 <af:commandButton text="Generate Report" id="cb3"/>
+                <af:commandButton text="Attach Document" id="cb18"
+                  actionListener="#{ManagedBean.AttachDocument}"/>
               </af:panelGroupLayout>
             </af:group>
           </f:facet>

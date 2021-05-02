@@ -1,5 +1,8 @@
 package mnj.ont.model.view.backing.bean;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import java.sql.CallableStatement;
 
 import javax.faces.context.ExternalContext;
@@ -64,6 +67,7 @@ public class ManagedBean {
     private RichInputText contractQuantity;
     private RichTable amendtable;
     private RichTable styleWiseQtyCalu;
+    private RichOutputText documentNumber;
 
     public ManagedBean() {
         super();
@@ -1201,5 +1205,57 @@ public class ManagedBean {
 
     public RichTable getStyleWiseQtyCalu() {
         return styleWiseQtyCalu;
+    }
+    public void AttachDocument(ActionEvent actionEvent) throws UnknownHostException {
+        // Add event code here...
+    //        String newPage =
+    //            "http://192.168.200.115:7003/FileUploading-ViewController-context-root/faces/view1?doc=SC&docNo="+getDocumentNumber().getValue();
+    //        // String newPage = "http://localhost:7101/PurchaseMemo-ViewController-context-root/faces/SearchPG?headerId="+getBomId().getValue();
+    //        FacesContext ctx = FacesContext.getCurrentInstance();
+    //        ExtendedRenderKitService erks =
+    //            Service.getService(ctx.getRenderKit(), ExtendedRenderKitService.class);
+    //        String url = "window.open('" + newPage + "','_self');";
+    //        erks.addScript(FacesContext.getCurrentInstance(), url);
+        
+         String newPage ;
+        newPage= this.getFileUploadPage();
+         
+         newPage +=  "?doc=SC&docNo="+getDocumentNumber().getValue();
+         
+      //  "http://192.168.200.115:7003/FileUploading-ViewController-context-root/faces/view1?doc=SC&docNo="+getDocumentNumber().getValue();
+         //"http://192.168.200.115:7003/FileUploading-ViewController-context-root/faces/view1?doc=CD_Invoice_No&docNo="+doc;
+        // String newPage = "http://localhost:7101/PurchaseMemo-ViewController-context-root/faces/SearchPG?headerId="+getBomId().getValue();
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        ExtendedRenderKitService erks = Service.getService(ctx.getRenderKit(), ExtendedRenderKitService.class);
+        String url = "window.open('" + newPage + "','_blank','toolbar=no,location=no,menubar=no,alwaysRaised=yes,height=500,width=1100');";
+        erks.addScript(FacesContext.getCurrentInstance(), url);
+        
+    }
+    
+    private String getFileUploadPage() throws UnknownHostException {
+        String part1 = "http://";
+      String  part2 = ":7003/FileUploading-ViewController-context-root/faces/view1";
+        String ip = getServerIp();
+        
+        String page = part1+ip+part2;
+        
+        return page;
+        
+        
+    }
+    private String getServerIp() throws UnknownHostException {
+        InetAddress localhost = InetAddress.getLocalHost(); 
+        String ip;
+        ip =  (localhost.getHostAddress()).trim();
+        return ip;
+    }
+
+
+    public void setDocumentNumber(RichOutputText documentNumber) {
+        this.documentNumber = documentNumber;
+    }
+
+    public RichOutputText getDocumentNumber() {
+        return documentNumber;
     }
 }
