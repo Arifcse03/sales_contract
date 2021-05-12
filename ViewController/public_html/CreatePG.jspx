@@ -813,14 +813,14 @@
                                    id="si1"/>
                   </af:selectOneChoice>
                 </af:column>
-                <af:column headerText="#{bindings.ImpSaleContractDetailEOView1.hints.OriginalQuantity.label}"
+                <af:column headerText="Total Quantity"
                            id="c73" align="center">
                   <af:outputText value="#{row.OriginalQuantity}" id="ot22">
                     <af:convertNumber groupingUsed="false"
                                       pattern="#{bindings.ImpSaleContractDetailEOView1.hints.OriginalQuantity.format}"/>
                   </af:outputText>
                 </af:column>
-                <af:column headerText="#{bindings.ImpSaleContractDetailEOView1.hints.OriginalTotalValue.label}"
+                <af:column headerText="Total Value"
                            id="c74" align="center">
                   <af:outputText value="#{row.OriginalTotalValue}" id="ot23">
                     <af:convertNumber groupingUsed="false"
