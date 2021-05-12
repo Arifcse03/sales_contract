@@ -6,57 +6,13 @@
   Name="ImpSaleContractDetailEOView"
   Version="11.1.1.62.29"
   InheritPersonalization="true"
-  SelectList="ImpSaleContractDetailEO.ADVISED_BANK, 
-       ImpSaleContractDetailEO.ATTRIBUTE1, 
-       ImpSaleContractDetailEO.ATTRIBUTE10, 
-       ImpSaleContractDetailEO.ATTRIBUTE11, 
-       ImpSaleContractDetailEO.ATTRIBUTE12, 
-       ImpSaleContractDetailEO.ATTRIBUTE13, 
-       ImpSaleContractDetailEO.ATTRIBUTE14, 
-       ImpSaleContractDetailEO.ATTRIBUTE15, 
-       ImpSaleContractDetailEO.ATTRIBUTE16, 
-       ImpSaleContractDetailEO.ATTRIBUTE17, 
-       ImpSaleContractDetailEO.ATTRIBUTE18, 
-       ImpSaleContractDetailEO.ATTRIBUTE19, 
-       ImpSaleContractDetailEO.ATTRIBUTE2, 
-       ImpSaleContractDetailEO.ATTRIBUTE20, 
-       ImpSaleContractDetailEO.ATTRIBUTE21, 
-       ImpSaleContractDetailEO.ATTRIBUTE22, 
-       ImpSaleContractDetailEO.ATTRIBUTE23, 
-       ImpSaleContractDetailEO.ATTRIBUTE24, 
-       ImpSaleContractDetailEO.ATTRIBUTE25, 
-       ImpSaleContractDetailEO.ATTRIBUTE26, 
-       ImpSaleContractDetailEO.ATTRIBUTE27, 
-       ImpSaleContractDetailEO.ATTRIBUTE28, 
-       ImpSaleContractDetailEO.ATTRIBUTE29, 
-       ImpSaleContractDetailEO.ATTRIBUTE3, 
-       ImpSaleContractDetailEO.ATTRIBUTE30, 
-       ImpSaleContractDetailEO.ATTRIBUTE4, 
-       ImpSaleContractDetailEO.ATTRIBUTE5, 
-       ImpSaleContractDetailEO.ATTRIBUTE6, 
-       ImpSaleContractDetailEO.ATTRIBUTE7, 
-       ImpSaleContractDetailEO.ATTRIBUTE8, 
-       ImpSaleContractDetailEO.ATTRIBUTE9, 
-       ImpSaleContractDetailEO.CREATED_BY, 
-       ImpSaleContractDetailEO.CREATION_DATE, 
-       ImpSaleContractDetailEO.CURRENCY, 
-       ImpSaleContractDetailEO.EXPORT_LC_DATE, 
-       ImpSaleContractDetailEO.EXPORT_LC_NO, 
-       ImpSaleContractDetailEO.EXPORT_LC_QUANTITY, 
-       ImpSaleContractDetailEO.EXPORT_LC_VALUE, 
-       ImpSaleContractDetailEO.IMP_SALE_DETAIL_ID, 
-       ImpSaleContractDetailEO.IMP_SALE_HEADER_ID, 
-       ImpSaleContractDetailEO.LAST_UPDATE_DATE, 
-       ImpSaleContractDetailEO.LAST_UPDATE_LOGIN, 
-       ImpSaleContractDetailEO.LAST_UPDATED_BY, 
-       ImpSaleContractDetailEO.LC_ISSUING_BANK, 
-       ImpSaleContractDetailEO.NEGOTIATION_DAYS, 
-       ImpSaleContractDetailEO.SALES_TERMS"
-  FromList="XX_COM_EXPORT_LC_H_T ImpSaleContractDetailEO"
   BindingStyle="OracleName"
-  CustomQuery="false"
+  CustomQuery="true"
   PageIterMode="Full"
   UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
   <Properties>
     <SchemaBasedProperties>
       <LABEL
@@ -121,6 +77,89 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
+  <SQLQuery>
+    <![CDATA[SELECT ImpSaleContractDetailEO.ADVISED_BANK, 
+       ImpSaleContractDetailEO.ATTRIBUTE1, 
+       ImpSaleContractDetailEO.ATTRIBUTE10, 
+       ImpSaleContractDetailEO.ATTRIBUTE11, 
+       ImpSaleContractDetailEO.ATTRIBUTE12, 
+       ImpSaleContractDetailEO.ATTRIBUTE13, 
+       ImpSaleContractDetailEO.ATTRIBUTE14, 
+       ImpSaleContractDetailEO.ATTRIBUTE15, 
+       ImpSaleContractDetailEO.ATTRIBUTE16, 
+       ImpSaleContractDetailEO.ATTRIBUTE17, 
+       ImpSaleContractDetailEO.ATTRIBUTE18, 
+       ImpSaleContractDetailEO.ATTRIBUTE19, 
+       ImpSaleContractDetailEO.ATTRIBUTE2, 
+       ImpSaleContractDetailEO.ATTRIBUTE20, 
+       ImpSaleContractDetailEO.ATTRIBUTE21, 
+       ImpSaleContractDetailEO.ATTRIBUTE22, 
+       ImpSaleContractDetailEO.ATTRIBUTE23, 
+       ImpSaleContractDetailEO.ATTRIBUTE24, 
+       ImpSaleContractDetailEO.ATTRIBUTE25, 
+       ImpSaleContractDetailEO.ATTRIBUTE26, 
+       ImpSaleContractDetailEO.ATTRIBUTE27, 
+       ImpSaleContractDetailEO.ATTRIBUTE28, 
+       ImpSaleContractDetailEO.ATTRIBUTE29, 
+       ImpSaleContractDetailEO.ATTRIBUTE3, 
+       ImpSaleContractDetailEO.ATTRIBUTE30, 
+       ImpSaleContractDetailEO.ATTRIBUTE4, 
+       ImpSaleContractDetailEO.ATTRIBUTE5, 
+       ImpSaleContractDetailEO.ATTRIBUTE6, 
+       ImpSaleContractDetailEO.ATTRIBUTE7, 
+       ImpSaleContractDetailEO.ATTRIBUTE8, 
+       ImpSaleContractDetailEO.ATTRIBUTE9, 
+       ImpSaleContractDetailEO.CREATED_BY, 
+       ImpSaleContractDetailEO.CREATION_DATE, 
+       ImpSaleContractDetailEO.CURRENCY, 
+       ImpSaleContractDetailEO.EXPORT_LC_DATE, 
+       ImpSaleContractDetailEO.EXPORT_LC_NO, 
+       ImpSaleContractDetailEO.EXPORT_LC_QUANTITY, 
+       ImpSaleContractDetailEO.EXPORT_LC_VALUE, 
+       ImpSaleContractDetailEO.IMP_SALE_DETAIL_ID, 
+       ImpSaleContractDetailEO.IMP_SALE_HEADER_ID, 
+       ImpSaleContractDetailEO.LAST_UPDATE_DATE, 
+       ImpSaleContractDetailEO.LAST_UPDATE_LOGIN, 
+       ImpSaleContractDetailEO.LAST_UPDATED_BY, 
+       ImpSaleContractDetailEO.LC_ISSUING_BANK, 
+       ImpSaleContractDetailEO.NEGOTIATION_DAYS, 
+       ImpSaleContractDetailEO.SALES_TERMS,
+       (
+       select  sum(ORIGINAL_QUANTITY) from 
+(
+SELECT ImpSaleContractAmendEO.IMP_SALE_DETAIL_ID,             
+(
+SELECT SUM (ORDERED_QUANTITY) QUANTITY
+FROM (SELECT OLA.ORDERED_QUANTITY, OLA.LINE_ID
+FROM OE_ORDER_HEADERS_ALL OHA, OE_ORDER_LINES_ALL OLA
+WHERE OHA.HEADER_ID = OLA.HEADER_ID) QUE
+WHERE LINE_ID = TO_NUMBER(ImpSaleContractAmendEO.ATTRIBUTE1)
+GROUP BY LINE_ID
+) ORIGINAL_QUANTITY
+FROM XX_COM_EXPORT_LC_L_T ImpSaleContractAmendEO
+)
+where IMP_SALE_DETAIL_ID = ImpSaleContractDetailEO.IMP_SALE_DETAIL_ID
+group by IMP_SALE_DETAIL_ID ) as ORIGINAL_QUANTITY,
+
+(select sum(ORIGINAL_TOTAL_VALUE) from 
+(
+SELECT ImpSaleContractAmendEO.IMP_SALE_DETAIL_ID,             
+(
+SELECT SUM (TOTAL_VALUE) TOTAL_VALUE
+FROM (SELECT (OLA.ORDERED_QUANTITY * OLA.UNIT_SELLING_PRICE
+) TOTAL_VALUE, OLA.LINE_ID
+FROM OE_ORDER_HEADERS_ALL OHA, OE_ORDER_LINES_ALL OLA
+WHERE OHA.HEADER_ID = OLA.HEADER_ID) QUE
+WHERE LINE_ID = TO_NUMBER(ImpSaleContractAmendEO.ATTRIBUTE1)
+GROUP BY LINE_ID
+) ORIGINAL_TOTAL_VALUE
+FROM XX_COM_EXPORT_LC_L_T ImpSaleContractAmendEO
+)
+where IMP_SALE_DETAIL_ID = ImpSaleContractDetailEO.IMP_SALE_DETAIL_ID
+group by IMP_SALE_DETAIL_ID 
+) as ORIGINAL_TOTAL_VALUE
+FROM XX_COM_EXPORT_LC_H_T ImpSaleContractDetailEO]]>
+  </SQLQuery>
   <EntityUsage
     Name="ImpSaleContractDetailEO"
     Entity="model.entity.ImpSaleContractDetailEO"
@@ -426,13 +465,41 @@
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
-  <ResourceBundle>
-    <PropertiesBundle
-      PropertiesFile="model.ModelBundle"/>
-  </ResourceBundle>
+  <ViewAttribute
+    Name="OriginalQuantity"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ORIGINAL_QUANTITY"
+    Expression="ORIGINAL_QUANTITY"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OriginalTotalValue"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ORIGINAL_TOTAL_VALUE"
+    Expression="ORIGINAL_TOTAL_VALUE"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="ImpSaleContractAmendVO"
     ViewLink="model.view.DetailAmendLink"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

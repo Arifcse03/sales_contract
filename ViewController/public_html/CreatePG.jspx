@@ -813,6 +813,20 @@
                                    id="si1"/>
                   </af:selectOneChoice>
                 </af:column>
+                <af:column headerText="#{bindings.ImpSaleContractDetailEOView1.hints.OriginalQuantity.label}"
+                           id="c73" align="center">
+                  <af:outputText value="#{row.OriginalQuantity}" id="ot22">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ImpSaleContractDetailEOView1.hints.OriginalQuantity.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column headerText="#{bindings.ImpSaleContractDetailEOView1.hints.OriginalTotalValue.label}"
+                           id="c74" align="center">
+                  <af:outputText value="#{row.OriginalTotalValue}" id="ot23">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ImpSaleContractDetailEOView1.hints.OriginalTotalValue.format}"/>
+                  </af:outputText>
+                </af:column>
               </af:table>
             </af:panelCollection>
             <af:panelHeader text="Order Detail" id="ph1">
@@ -1401,9 +1415,16 @@
                         binding="#{ManagedBean.styleWiseQtyCalu}">
                 <af:column sortProperty="StyleNo" filterable="true"
                            sortable="true" headerText="Style No" id="c35"
-                           align="center">
+                           align="center" visible="true">
                   <af:outputText value="#{row.StyleNo}" id="ot15"/>
-                  <af:spacer width="10" height="10" id="s3"/>
+                </af:column>
+                <af:column headerText="Bpo Id"
+                           id="c72" align="center" sortable="true"
+                           filterable="true" sortProperty="BpoId">
+                  <af:outputText value="#{row.BpoId}" id="ot21">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.StyleWiseQtyCalVo1.hints.BpoId.format}"/>
+                  </af:outputText>
                 </af:column>
                 <af:column sortProperty="Quantity" filterable="true"
                            sortable="true" headerText="Qty" id="c55"

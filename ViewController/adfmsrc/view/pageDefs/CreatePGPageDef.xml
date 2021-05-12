@@ -334,6 +334,8 @@
           <Item Value="NegotiationDays"/>
           <Item Value="SalesTerms"/>
           <Item Value="Currency"/>
+          <Item Value="OriginalQuantity"/>
+          <Item Value="OriginalTotalValue"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -360,6 +362,7 @@
           <Item Value="Quantity"/>
           <Item Value="UnitPrice"/>
           <Item Value="TotalValue"/>
+          <Item Value="BpoId"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
