@@ -339,8 +339,6 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
-    <action IterBinding="ImpSaleContractAmendVO1Iterator" id="CreateInsert1"
-            RequiresUpdateModel="true" Action="createInsertRow"/>
     <action IterBinding="ImpSaleContractAmendVO1Iterator" id="Delete1"
             RequiresUpdateModel="false" Action="removeCurrentRow"/>
     <action IterBinding="ImpSaleContractDetailEOView1Iterator"

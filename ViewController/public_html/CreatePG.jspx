@@ -654,7 +654,7 @@
                   <af:commandButton actionListener="#{bindings.CreateInsert2.execute}"
                                     text="Create"
                                     disabled="#{!bindings.CreateInsert2.enabled}"
-                                    id="cb18"/>
+                                    id="cb4"/>
                   <af:commandButton actionListener="#{bindings.Delete2.execute}"
                                     text="Delete"
                                     disabled="#{!bindings.Delete2.enabled}"
@@ -679,7 +679,7 @@
                         selectedRowKeys="#{bindings.ImpSaleContractDetailEOView1.collectionModel.selectedRow}"
                         selectionListener="#{bindings.ImpSaleContractDetailEOView1.collectionModel.makeCurrent}"
                         rowSelection="single" id="t5"
-                        partialTriggers="::cb5 ::cb18 ::cb15">
+                        partialTriggers="::cb5 ::cb18 ::cb15 ::cb4">
                 <af:column sortProperty="ExportLcNo" filterable="true"
                            sortable="true"
                            headerText="MoU / Export L / C Number"
@@ -836,21 +836,16 @@
                 <f:facet name="menus"/>
                 <f:facet name="toolbar">
                   <af:toolbar id="t8">
-                    <af:commandButton actionListener="#{bindings.CreateInsert1.execute}"
-                                      text="Create"
-                                      disabled="#{!bindings.CreateInsert1.enabled}"
-                                      id="cb5"/>
                     <af:commandButton actionListener="#{bindings.Delete1.execute}"
                                       text="Delete"
                                       disabled="#{!bindings.Delete1.enabled}"
-                                      id="cb14"/>
+                                      id="cb14" partialSubmit="true"/>
                     <af:commandButton text="Fill BPO" id="cb19">
                       <af:showPopupBehavior popupId="::p2" alignId="::f1"/>
                     </af:commandButton>
                     <af:commandButton text="Save" id="cb20" visible="false"/>
                     <af:commandButton actionListener="#{bindings.Commit.execute}"
                                       text="Save"
-                                      disabled="#{!bindings.Commit.enabled}"
                                       id="cb17"/>
                     <af:commandButton text="Export to Excel" id="cb21">
                       <af:exportCollectionActionListener type="excelHTML"
@@ -873,7 +868,7 @@
                           selectionListener="#{bindings.ImpSaleContractAmendVO1.collectionModel.makeCurrent}"
                           rowSelection="single" id="t6"
                           binding="#{ManagedBean.amendtable}"
-                          partialTriggers="::cb5 ::cb14">
+                          partialTriggers="::cb14 :::pc3:t5">
                   <af:column sortProperty="StyleNo" filterable="true"
                              sortable="true"
                              headerText="Style No"
