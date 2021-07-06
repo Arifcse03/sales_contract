@@ -73,7 +73,7 @@
                                 model="#{bindings.Buyer.listOfValuesModel}"
                                 columns="#{bindings.Buyer.hints.displayWidth}"
                                 shortDesc="#{bindings.Buyer.hints.tooltip}"
-                                required="true" autoSubmit="true">
+                                required="false" autoSubmit="true">
             <f:validator binding="#{bindings.Buyer.validator}"/>
             <af:autoSuggestBehavior suggestedItems="#{bindings.Buyer.suggestedItems}"/>
           </af:inputListOfValues>
@@ -84,7 +84,7 @@
                                         model="#{bindings.Season.listOfValuesModel}"
                                         columns="#{bindings.Season.hints.displayWidth}"
                                         shortDesc="#{bindings.Season.hints.tooltip}"
-                                        showRequired="true" required="true"
+                                        showRequired="true" required="false"
                                         partialTriggers="buyerId">
             <f:validator binding="#{bindings.Season.validator}"/>
           </af:inputComboboxListOfValues>
@@ -186,6 +186,7 @@
                                         columns="#{bindings.OrderType.hints.displayWidth}"
                                         shortDesc="#{bindings.OrderType.hints.tooltip}">
             <f:validator binding="#{bindings.OrderType.validator}"/>
+            <af:autoSuggestBehavior suggestedItems="#{bindings.OrderType.suggestedItems}"/>
           </af:inputComboboxListOfValues>
           <af:inputComboboxListOfValues id="exportLcReplaceId"
                                         popupTitle="Search and Select: #{bindings.ExportLcReplace.hints.label}"
@@ -196,6 +197,7 @@
                                         columns="#{bindings.ExportLcReplace.hints.displayWidth}"
                                         shortDesc="#{bindings.ExportLcReplace.hints.tooltip}">
             <f:validator binding="#{bindings.ExportLcReplace.validator}"/>
+            <af:autoSuggestBehavior suggestedItems="#{bindings.ExportLcReplace.suggestedItems}"/>
           </af:inputComboboxListOfValues>
           <af:inputText value="#{bindings.ContractQuantity.inputValue}"
                         label="Contract Quantity"
@@ -337,7 +339,7 @@
                         columns="#{bindings.BuyerId.hints.displayWidth}"
                         maximumLength="#{bindings.BuyerId.hints.precision}"
                         shortDesc="#{bindings.BuyerId.hints.tooltip}" id="it24"
-                        visible="false" partialTriggers="buyerNameNewId"
+                        visible="true" partialTriggers="buyerId"
                         readOnly="true" binding="#{ManagedBean.buyerId}">
             <f:validator binding="#{bindings.BuyerId.validator}"/>
           </af:inputText>

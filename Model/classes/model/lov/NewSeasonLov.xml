@@ -22,7 +22,14 @@
   <Variable
     Name="P_BUYER"
     Kind="where"
-    Type="java.lang.String"/>
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
   <SQLQuery>
     <![CDATA[select * from XX_OM_BUYERWISE_SEASON_T where status=1 and buyer_id=:P_BUYER]]>
   </SQLQuery>
@@ -99,7 +106,7 @@
     ColumnType="DATE"
     AliasName="START_DATE"
     Expression="START_DATE"
-    SQLType="TIMESTAMP">
+    SQLType="DATE">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="7"/>
     </DesignTime>
@@ -113,7 +120,7 @@
     ColumnType="DATE"
     AliasName="END_DATE"
     Expression="END_DATE"
-    SQLType="TIMESTAMP">
+    SQLType="DATE">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="7"/>
     </DesignTime>
@@ -127,7 +134,7 @@
     ColumnType="DATE"
     AliasName="CREATION_DATE"
     Expression="CREATION_DATE"
-    SQLType="TIMESTAMP">
+    SQLType="DATE">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="7"/>
     </DesignTime>
@@ -155,7 +162,7 @@
     ColumnType="DATE"
     AliasName="UPDATION_DATE"
     Expression="UPDATION_DATE"
-    SQLType="TIMESTAMP">
+    SQLType="DATE">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="7"/>
     </DesignTime>
@@ -174,6 +181,58 @@
       <Attr Name="_DisplaySize" Value="39"/>
     </DesignTime>
   </ViewAttribute>
+  <ViewCriteria
+    Name="NewSeasonLovCriteria"
+    ViewObjectName="model.lov.NewSeasonLov"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow9"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="NewSeasonLovCriteria_vcrow9_BuyerId"
+        ViewAttribute="BuyerId"
+        Operator="="
+        Conjunction="AND"
+        Value=":P_BUYER"
+        GenerateIsNullClauseForBindVars="false"
+        ValidateBindVars="true"
+        IsBindVarValue="true"
+        Required="Required">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Never"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="Season"
+        ViewAttribute="Season"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="model.ModelBundle"/>

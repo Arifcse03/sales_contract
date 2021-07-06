@@ -97,6 +97,9 @@
   <ViewAccessor
     Name="NewSeasonLov1"
     ViewObjectName="model.lov.NewSeasonLov">
+    <ViewCriteriaUsage
+      Name="NewSeasonLovCriteria"
+      FullName="model.lov.NewSeasonLov.NewSeasonLovCriteria"/>
     <ParameterMap>
       <PIMap Variable="P_BUYER">
         <TransientExpression><![CDATA[BuyerId]]></TransientExpression>
@@ -375,9 +378,9 @@
   <ListBinding
     Name="LOV_Season"
     ListVOName="NewSeasonLov1"
-    ListRangeSize="-1"
-    NullValueFlag="start"
-    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_Season_LOVUIHints_NullValueId"
     MRUCount="0">
     <AttrArray Name="AttrNames">
       <Item Value="Season"/>
@@ -385,7 +388,12 @@
     <AttrArray Name="ListAttrNames">
       <Item Value="Season"/>
     </AttrArray>
-    <DisplayCriteria/>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Season"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="NewSeasonLovCriteria"
+      Hint="showAndExecute"/>
   </ListBinding>
   <ListBinding
     Name="LOV_Buyer"
@@ -591,7 +599,7 @@ ORDER BY IMP_SALE_HEADER_ID desc]]>
         <DISPLAYWIDTH
           Value="30"/>
         <CONTROLTYPE
-          Value="choice"/>
+          Value="input_text_lov"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
